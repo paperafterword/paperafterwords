@@ -31,6 +31,10 @@ config/secrets.json
 personal/
 private/
 
+# Documentation files (private)
+BLOG_MANAGEMENT.md
+PROJECT_REFLECTION.md
+
 # macOS-specific files
 .DS_Store
 
