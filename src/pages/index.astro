@@ -2,7 +2,8 @@
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
-const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = sortedPosts.slice(0, 5); // トップページは最新5記事のみ
 ---
 
 <!DOCTYPE html>
@@ -101,6 +102,15 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
           </article>
         ))}
       </div>
+      
+      <!-- もっと見るリンク -->
+      {allPosts.length > 5 && (
+        <div class="more-posts">
+          <a href="/blog" class="more-posts-link">
+            もっと見る →
+          </a>
+        </div>
+      )}
       
       <section id="gallery" class="section">
         <h2>Gallery</h2>
