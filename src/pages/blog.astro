@@ -88,11 +88,13 @@ const nextPage = currentPage + 1;
               <div class="meta">
                 {post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP')}
               </div>
-              <p>{post.data.description}</p>
+              <p><a href={`/blog/${post.data.id || post.slug}`}>{post.data.description}</a></p>
             </div>
             
             <div class="post-images">
-              <img src="/boy-making-origami-bird.png" alt="折り紙を作る少年" />
+              <a href={`/blog/${post.data.id || post.slug}`}>
+                <img src={post.data.coverImage || "/boy-making-origami-bird.png"} alt={post.data.title} />
+              </a>
             </div>
           </article>
         ))}
