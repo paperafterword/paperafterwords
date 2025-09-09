@@ -2,7 +2,26 @@
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
-const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// ページネーション設定
+const postsPerPage = 10;
+const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+
+// URLパラメータから現在のページを取得
+const url = new URL(Astro.request.url);
+const currentPage = parseInt(url.searchParams.get('page') || '1');
+
+// 現在のページの記事を取得
+const startIndex = (currentPage - 1) * postsPerPage;
+const endIndex = startIndex + postsPerPage;
+const posts = sortedPosts.slice(startIndex, endIndex);
+
+// ページネーション情報
+const hasPrevPage = currentPage > 1;
+const hasNextPage = currentPage < totalPages;
+const prevPage = currentPage - 1;
+const nextPage = currentPage + 1;
 ---
 
 <!DOCTYPE html>
@@ -78,6 +97,40 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
           </article>
         ))}
       </div>
+
+      <!-- ページネーション -->
+      {totalPages > 1 && (
+        <nav class="pagination">
+          <div class="pagination-info">
+            {currentPage} / {totalPages} ページ
+          </div>
+          
+          <div class="pagination-links">
+            {hasPrevPage && (
+              <a href={`/blog?page=${prevPage}`} class="pagination-link prev">
+                ← 前のページ
+              </a>
+            )}
+            
+            <div class="pagination-numbers">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <a 
+                  href={`/blog?page=${pageNum}`} 
+                  class={`pagination-link ${pageNum === currentPage ? 'current' : ''}`}
+                >
+                  {pageNum}
+                </a>
+              ))}
+            </div>
+            
+            {hasNextPage && (
+              <a href={`/blog?page=${nextPage}`} class="pagination-link next">
+                次のページ →
+              </a>
+            )}
+          </div>
+        </nav>
+      )}
     </main>
   </div>
 
