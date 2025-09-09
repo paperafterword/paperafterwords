@@ -3,12 +3,14 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
 const allPosts = await getCollection('blog');
-const sortedPosts = allPosts.sort((a, b) => {
-  const idA = parseInt(a.data.id || a.slug);
-  const idB = parseInt(b.data.id || b.slug);
-  return idB - idA; // 新しい番号から順番に表示
-});
-const posts = sortedPosts.slice(0, 5); // トップページは最新5記事のみ
+
+// フィーチャード記事のIDを指定（順番通りに表示）
+const featuredPostIds = ['012', '004', '011', '010', '009']; 
+
+// フィーチャード記事を指定された順番で取得
+const posts = featuredPostIds.map(id => 
+  allPosts.find(post => post.data.id === id)
+).filter(Boolean); // undefinedを除外
 ---
 
 <Layout title="Paper After Word" currentPage="top">
