@@ -16,6 +16,20 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.local
+.env.development
+
+# API keys and secrets
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+config/secrets.json
+
+# Personal information
+personal/
+private/
 
 # macOS-specific files
 .DS_Store
