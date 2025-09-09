@@ -248,7 +248,7 @@ select::-ms-expand {
 
 /* フォントウェイトクラス */
 strong {
-	font-weight: normal;
+	font-weight: bold;
 	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
 }
 
@@ -501,7 +501,7 @@ strong {
 
 /* 記事内の要素スタイル */
 .content.-edit strong {
-	font-weight: normal;
+	font-weight: bold;
 	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
 }
 
