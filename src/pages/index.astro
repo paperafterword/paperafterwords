@@ -1,16 +1,146 @@
 ---
+import { getCollection } from 'astro:content';
 
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper After Word</title>
+  <link rel="stylesheet" href="/src/styles/base.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header_inner">
+        <div class="header_title">
+          <h1><a href="/">Paper After Word</a></h1>
+        </div>
+        <nav class="header_nav">
+          <div class="nav_global">
+            <ul>
+              <li><a href="/" class="-current">Top</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+              <li><a href="/shop">Shop</a></li>
+              <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="twitter-icon">𝕏</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="header_id">
+          <a href="/">Paper After Word</a>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav">
+        <ul>
+          <li><a href="/" class="-current">Top</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/gallery">Gallery</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="twitter-icon">𝕏</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="site-header">
+      <h1>本を読んで、読んだ本を折り紙にする。</h1>
+    </div>
+
+    <main class="content">
+        <figure class="camera-photo-container">
+          <img src="/zatto.png" alt="雑踏" class="camera-photo" />
+          <figcaption class="photo-caption">
+            « Fais ce que voudras.» 汝の欲するところを為せ
+            <span class="quote-author">— フランソワ・ラブレー</span>
+          </figcaption>
+        </figure>
+      <div class="intro">
+        <p>本というものは、読み終えた後、ただ棚に並べておくばかりでは、どうにもその余情が空に散ってしまうように思われる。<br />
+          折り紙が好きで、せっかく紙がそこにあるのなら...<br />
+          意味があるかどうかはわからないが、手を動かしていると、そのこと自体が少しおもしろい。</p>
+          <p>そこに積み重なった紙の山を、静かに別の姿へと折り変えてみたくなる。文字はすでに胸の裡に沈み込み、その用を終えた紙は、今や形そのもののために在る。</p>
+        <p>ここでは、読み終えた本の紙を折り紙にし、本の感想と合わせてその記録を残す。</p>
+        
+        <div class="intro-images">
+          <img src="/boy-making-origami-bird.png" alt="折り紙を作る少年" />
+          <img src="/boy-making-origami-bird.png" alt="折り紙を作る少年" />
+        </div>
+
+        <p>降神（志人、なのるなもない）の言葉と音楽は、折り、重ね、畳み、裏返し、ひらき、切り、また広げる。新しい形を生み出す。<br />
+          そして折り紙の構造は、建築や工学とも深くつながっている。ゲーテは言った。「建築は凍れる音楽である」。<br />
+          読み終えた本の紙もまた、音楽となり、もう一度私の心に響くのだろう。</p>
+      </div>
+
+      <h2 id="blog" class="section-title">作品一覧</h2>      
+      <div class="posts">
+        {posts.map((post) => (
+          <article class="post">
+            <div class="post-content">
+              <h3><a href={`/blog/${post.data.id || post.slug}`}>{post.data.title}</a></h3>
+              <div class="meta">
+                {post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP')}
+              </div>
+              <p>{post.data.description}</p>
+            </div>
+            
+            <div class="post-images">
+              <img src="/boy-making-origami-bird.png" alt="折り紙を作る少年" />
+            </div>
+          </article>
+        ))}
+      </div>
+      
+      <section id="gallery" class="section">
+        <h2>Gallery</h2>
+        <p class="section-text">折り紙作品のギャラリーは準備中です。</p>
+      </section>
+      
+      <section id="shop" class="section">
+        <h2>Shop</h2>
+        <p class="section-text">オンラインショップは準備中です。</p>
+      </section>
+      
+      <section id="sns" class="section">
+        <h2>SNS</h2>
+        <p class="section-text">
+          <a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="sns-link">𝕏</a>
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // ハンバーガーメニューの制御
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobile-nav');
+
+      // ハンバーガーメニューの制御
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', function() {
+          hamburger.classList.toggle('active');
+          mobileNav.classList.toggle('active');
+        });
+
+        // メニュー項目をクリックしたらメニューを閉じる
+        const mobileNavLinks = mobileNav.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
+</body>
 </html>

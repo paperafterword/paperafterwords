@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Paper After Word</title>
+  <link rel="stylesheet" href="/src/styles/base.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header_inner">
+        <div class="header_title">
+          <h1><a href="/">Paper After Word</a></h1>
+        </div>
+        <nav class="header_nav">
+          <div class="nav_global">
+            <ul>
+              <li><a href="/">Top</a></li>
+              <li><a href="/blog" class="-current">Blog</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+              <li><a href="/shop">Shop</a></li>
+              <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="twitter-icon">𝕏</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="header_id">
+          <a href="/">Paper After Word</a>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav">
+        <ul>
+          <li><a href="/">Top</a></li>
+          <li><a href="/blog" class="-current">Blog</a></li>
+          <li><a href="/gallery">Gallery</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="twitter-icon">𝕏</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="back">
+      <a href="/">← トップに戻る</a>
+    </div>
+
+    <div class="page-header">
+      <h1>Blog</h1>
+      <p>本を読んで、読んだ本を折り紙にする。</p>
+    </div>
+
+    <main class="content">
+      <div class="posts">
+        {posts.map((post) => (
+          <article class="post">
+            <div class="post-content">
+              <h3><a href={`/blog/${post.data.id || post.slug}`}>{post.data.title}</a></h3>
+              <div class="meta">
+                {post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP')}
+              </div>
+              <p>{post.data.description}</p>
+            </div>
+            
+            <div class="post-images">
+              <img src="/boy-making-origami-bird.png" alt="折り紙を作る少年" />
+            </div>
+          </article>
+        ))}
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ハンバーガーメニューの制御
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobile-nav');
+
+      // ハンバーガーメニューの制御
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', function() {
+          hamburger.classList.toggle('active');
+          mobileNav.classList.toggle('active');
+        });
+
+        // メニュー項目をクリックしたらメニューを閉じる
+        const mobileNavLinks = mobileNav.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

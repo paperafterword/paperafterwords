@@ -1,0 +1,11 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#f8f8f8"/>
+  <rect x="20" y="20" width="360" height="360" fill="#ffffff" stroke="#cccccc" stroke-width="2"/>
+  <circle cx="200" cy="200" r="60" fill="#e91e63" stroke="#c2185b" stroke-width="2"/>
+  <circle cx="200" cy="200" r="45" fill="#f06292"/>
+  <circle cx="200" cy="200" r="30" fill="#e91e63"/>
+  <circle cx="200" cy="200" r="15" fill="#c2185b"/>
+  <ellipse cx="200" cy="280" rx="20" ry="8" fill="#4caf50"/>
+  <ellipse cx="200" cy="280" rx="15" ry="6" fill="#66bb6a"/>
+  <text x="200" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666666">バラの折り紙</text>
+</svg>

@@ -1,0 +1,93 @@
+---
+// Gallery page for displaying origami works
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Paper After Word</title>
+  <link rel="stylesheet" href="/src/styles/base.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header_inner">
+        <div class="header_title">
+          <h1><a href="/">Paper After Word</a></h1>
+        </div>
+        <nav class="header_nav">
+          <div class="nav_global">
+            <ul>
+              <li><a href="/">Top</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/gallery" class="-current">Gallery</a></li>
+              <li><a href="/shop">Shop</a></li>
+              <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="twitter-icon">𝕏</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="header_id">
+          <a href="/">Paper After Word</a>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav">
+        <ul>
+          <li><a href="/">Top</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/gallery" class="-current">Gallery</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="twitter-icon">𝕏</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="back">
+      <a href="/">← トップに戻る</a>
+    </div>
+
+    <div class="page-header">
+      <h1>Gallery</h1>
+      <p>折り紙作品のギャラリー</p>
+    </div>
+
+    <main class="content">
+      <div class="coming-soon">
+        <h2>準備中</h2>
+        <p>折り紙作品のギャラリーは準備中です。<br>近日中に公開予定です。</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ハンバーガーメニューの制御
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobile-nav');
+
+      // ハンバーガーメニューの制御
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', function() {
+          hamburger.classList.toggle('active');
+          mobileNav.classList.toggle('active');
+        });
+
+        // メニュー項目をクリックしたらメニューを閉じる
+        const mobileNavLinks = mobileNav.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
