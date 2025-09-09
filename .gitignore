@@ -34,6 +34,7 @@ private/
 # Documentation files (private)
 BLOG_MANAGEMENT.md
 PROJECT_REFLECTION.md
+DEPLOYMENT_GUIDE.md
 
 # macOS-specific files
 .DS_Store
