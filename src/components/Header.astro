@@ -1,0 +1,70 @@
+---
+export interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = "" } = Astro.props;
+---
+
+<header class="header">
+  <div class="header_inner">
+    <div class="header_title">
+      <h1><a href="/">Paper After Word</a></h1>
+    </div>
+    <nav class="header_nav">
+      <div class="nav_global">
+        <ul>
+          <li><a href="/" class={currentPage === "top" ? "-current" : ""}>Top</a></li>
+          <li><a href="/blog" class={currentPage === "blog" ? "-current" : ""}>Blog</a></li>
+          <li><a href="/gallery" class={currentPage === "gallery" ? "-current" : ""}>Gallery</a></li>
+          <li><a href="/shop" class={currentPage === "shop" ? "-current" : ""}>Shop</a></li>
+          <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="social-icon">𝕏</a></li>
+          <li><a href="https://jp.pinterest.com/paperafterword/" target="_blank" rel="noopener noreferrer" class="social-icon"><img src="/pinterest.png" alt="Pinterest" width="20" height="20"></a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="header_id">
+      <a href="/">Paper After Word</a>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <ul>
+      <li><a href="/" class={currentPage === "top" ? "-current" : ""}>Top</a></li>
+      <li><a href="/blog" class={currentPage === "blog" ? "-current" : ""}>Blog</a></li>
+      <li><a href="/gallery" class={currentPage === "gallery" ? "-current" : ""}>Gallery</a></li>
+      <li><a href="/shop" class={currentPage === "shop" ? "-current" : ""}>Shop</a></li>
+      <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="social-icon">𝕏</a></li>
+      <li><a href="https://jp.pinterest.com/paperafterword/" target="_blank" rel="noopener noreferrer" class="social-icon"><img src="/pinterest.png" alt="Pinterest" width="20" height="20"></a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  // ハンバーガーメニューの制御
+  document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    // ハンバーガーメニューの制御
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+      });
+
+      // メニュー項目をクリックしたらメニューを閉じる
+      const mobileNavLinks = mobileNav.querySelectorAll('a');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          mobileNav.classList.remove('active');
+        });
+      });
+    }
+  });
+</script>

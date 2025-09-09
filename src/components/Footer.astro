@@ -1,0 +1,198 @@
+---
+// Footer component
+---
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h3>Paper After Words</h3>
+        <p>本を読んで、読んだ本を折り紙にする。</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4>サイト</h4>
+          <ul>
+            <li><a href="/">トップ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/shop">Shop</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>情報</h4>
+          <ul>
+            <li><a href="/afterword">あとがき</a></li>
+            <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer">X</a></li>
+            <li><a href="https://jp.pinterest.com/paperafterword/" target="_blank" rel="noopener noreferrer"><img src="/pinterest.png" alt="Pinterest" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        <p>&copy; 2023 Paper After Words. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-top: 2px solid #dee2e6;
+    padding: 60px 0 30px 0;
+    margin-top: 80px;
+    position: relative;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ccc, transparent);
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand h3 {
+    color: #2c3e50;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-brand p {
+    color: #6c757d;
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .footer-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-section h4 {
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section li {
+    margin-bottom: 12px;
+  }
+
+  .footer-section a {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+  }
+
+  .footer-section a:hover {
+    color: #2c3e50;
+    padding-left: 8px;
+  }
+
+  .footer-section a::before {
+    content: '→';
+    position: absolute;
+    left: -15px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: #007bff;
+  }
+
+  .footer-section a:hover::before {
+    opacity: 1;
+    left: -12px;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #dee2e6;
+    padding-top: 30px;
+    text-align: center;
+  }
+
+  .footer-copyright p {
+    color: #6c757d;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 40px 0 20px 0;
+      margin-top: 60px;
+    }
+
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .footer-links {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+    }
+
+    .footer-brand h3 {
+      font-size: 20px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-content {
+      padding: 0 15px;
+    }
+
+    .footer-main {
+      gap: 30px;
+    }
+
+    .footer-links {
+      gap: 25px;
+    }
+  }
+</style>

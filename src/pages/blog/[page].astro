@@ -1,31 +1,45 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 
-const allPosts = await getCollection('blog');
-const sortedPosts = allPosts.sort((a, b) => {
-  const idA = parseInt(a.data.id || a.slug);
-  const idB = parseInt(b.data.id || b.slug);
-  return idB - idA; // 新しい番号から順番に表示
-});
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const sortedPosts = allPosts.sort((a, b) => {
+    const idA = parseInt(a.data.id || a.slug);
+    const idB = parseInt(b.data.id || b.slug);
+    return idB - idA; // 新しい番号から順番に表示
+  });
 
-// ページネーション設定
-const postsPerPage = 5;
-const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+  // ページネーション設定
+  const postsPerPage = 5;
+  const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
-// 1ページ目を表示
-const currentPage = 1;
+  // 動的にページを生成
+  const paths = [];
+  
+  // 2ページ目以降（/blog/2, /blog/3, ...）
+  for (let i = 2; i <= totalPages; i++) {
+    const startIndex = (i - 1) * postsPerPage;
+    const endIndex = startIndex + postsPerPage;
+    
+    paths.push({
+      params: { page: i.toString() },
+      props: {
+        posts: sortedPosts.slice(startIndex, endIndex),
+        currentPage: i,
+        totalPages,
+        hasPrevPage: true,
+        hasNextPage: i < totalPages,
+        prevPage: i - 1,
+        nextPage: i < totalPages ? i + 1 : null
+      }
+    });
+  }
 
-// 現在のページの記事を取得
-const startIndex = (currentPage - 1) * postsPerPage;
-const endIndex = startIndex + postsPerPage;
-const posts = sortedPosts.slice(startIndex, endIndex);
+  return paths;
+}
 
-// ページネーション情報
-const hasPrevPage = currentPage > 1;
-const hasNextPage = currentPage < totalPages;
-const prevPage = currentPage - 1;
-const nextPage = currentPage + 1;
+const { posts, currentPage, totalPages, hasPrevPage, hasNextPage, prevPage, nextPage } = Astro.props;
 ---
 
 <Layout title="Blog - Paper After Words" currentPage="blog">
