@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
@@ -13,70 +14,37 @@ const post = Astro.props as any;
 const { Content } = await post.render();
 ---
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{post.data.title} - Paper After Word</title>
-  <link rel="stylesheet" href="/base.css">
-</head>
-<body>
-  <div class="wrapper">
-    <header class="header">
-      <div class="header_inner">
-        <div class="header_title">
-          <h1><a href="/">Paper After Word</a></h1>
-        </div>
-        <nav class="header_nav">
-          <div class="nav_global">
-            <ul>
-              <li><a href="/">Top</a></li>
-              <li><a href="/#blog" class="-current">Blog</a></li>
-              <li><a href="/#gallery">Gallery</a></li>
-              <li><a href="/#shop">Shop</a></li>
-              <li><a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="twitter-icon">𝕏</a></li>
-            </ul>
-          </div>
-        </nav>
-        <div class="header_id">
-          <a href="/">Paper After Word</a>
-        </div>
-      </div>
-    </header>
-
-    <div class="back">
-      <a href="/">← 一覧に戻る</a>
-    </div>
-
-    <main class="contents">
-      <article class="content -edit">
-        <div class="content_inner">
-          <header class="content_header">
-            <h1 class="content_header_title">{post.data.title}</h1>
-            <ul class="content_header_summary">
-              <li>{post.data.author}</li>
-              <li>{new Date(post.data.date).toLocaleDateString('ja-JP')}</li>
-            </ul>
-          </header>
-          
-          <p><strong>{post.data.description}</strong></p>
-
-          <div class="images">
-            <div class="book-cover">
-              <img src={post.data.coverImage || "/images/default/no-cover.svg"} alt="本の表紙" />
-            </div>
-            {post.data.origamiImage && (
-              <div class="origami-work">
-                <img src={post.data.origamiImage} alt="折り紙作品" />
-              </div>
-            )}
-          </div>
-
-          <Content />
-        </div>
-      </article>
-    </main>
+<Layout title={`${post.data.title} - Paper After Word`} currentPage="blog">
+  <div class="back">
+    <a href="/">← 一覧に戻る</a>
   </div>
-</body>
-</html>
+
+  <main class="contents">
+    <article class="content -edit">
+      <div class="content_inner">
+        <header class="content_header">
+          <h1 class="content_header_title">{post.data.title}</h1>
+          <ul class="content_header_summary">
+            <li>{post.data.author}</li>
+            <li>{new Date(post.data.date).toLocaleDateString('ja-JP')}</li>
+          </ul>
+        </header>
+        
+        <p><strong>{post.data.description}</strong></p>
+
+        <div class="images">
+          <div class="book-cover">
+            <img src={post.data.coverImage || "/images/default/no-cover.svg"} alt="本の表紙" />
+          </div>
+          {post.data.origamiImage && (
+            <div class="origami-work">
+              <img src={post.data.origamiImage} alt="折り紙作品" />
+            </div>
+          )}
+        </div>
+
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
