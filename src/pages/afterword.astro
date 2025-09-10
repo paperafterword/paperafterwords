@@ -2,19 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="あとがき - Paper After Word">
+<Layout title="サイト運営ポリシー | Paper After Word">
     <div class="back">
       <a href="/">← トップに戻る</a>
     </div>
 
     <div class="page-header">
-      <h1>あとがき</h1>
-      <p>本を読んで、読んだ本を折り紙にする。</p>
+      <h1>サイト運営ポリシー</h1>
+      <p>このサイトの運営方針と著作権に関する情報</p>
     </div>
 
     <section class="afterword-content">
       <div class="afterword-text">
-        <h2>各出版社の書影利用について</h2>
+        <h2>著作権・書影利用について</h2>
         <p>
           このサイトでは、書籍紹介の目的で各出版社の書影を使用させていただいております。
           各出版社の利用ガイドラインに従い、適切な出典表示を行っております。
@@ -94,7 +94,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="afterword-signature">
           <p>2024年1月</p>
-          <p>Paper After Word 管理人</p>
+          <p>Paper After Word</p>
         </div>
       </div>
     </section>
@@ -112,39 +112,41 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .afterword-text h2 {
-    font-size: 24px;
-    margin: 40px 0 20px 0;
-    color: var(--text-color);
+    font-size: 2.4rem;
+    margin: 50px 0 25px 0;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
   }
 
   .afterword-text h3 {
-    font-size: 20px;
-    margin: 30px 0 15px 0;
-    color: #555;
+    font-size: 2.0rem;
+    margin: 35px 0 20px 0;
   }
 
   .afterword-text h4 {
-    font-size: 18px;
-    margin: 25px 0 10px 0;
-    color: #666;
+    font-size: 1.8rem;
+    margin: 25px 0 15px 0;
   }
 
   .afterword-text p {
     margin-bottom: 20px;
-    color: #666;
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 1.6rem;
   }
 
   .afterword-signature {
     margin-top: 60px;
     padding-top: 40px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-color);
     text-align: right;
   }
 
   .afterword-signature p {
     margin: 5px 0;
-    color: #888;
+    color: var(--text-light);
     font-style: italic;
+    font-size: 1.4rem;
   }
 
   @media (max-width: 768px) {
@@ -153,15 +155,22 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .afterword-text h2 {
-      font-size: 20px;
+      font-size: 2.0rem;
+      margin: 40px 0 20px 0;
     }
 
     .afterword-text h3 {
-      font-size: 18px;
+      font-size: 1.8rem;
+      margin: 30px 0 15px 0;
     }
 
     .afterword-text h4 {
-      font-size: 16px;
+      font-size: 1.6rem;
+      margin: 25px 0 10px 0;
+    }
+
+    .afterword-text p {
+      font-size: 1.4rem;
     }
   }
 </style>

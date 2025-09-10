@@ -45,6 +45,13 @@ body {
 	padding-top: 70px;
 }
 
+/* グローバルな見出しスタイル */
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
+	font-weight: bold;
+	color: var(--text-color);
+}
+
 /* 基本要素のスタイル */
 pre {
 	white-space: pre-wrap;
@@ -538,16 +545,6 @@ strong {
 	border-bottom: 1px solid #ccc;
 }
 
-.content.-edit blockquote::before,
-.content.-edit blockquote::after {
-	content: '';
-	display: block;
-	width: 200px;
-	height: 1px;
-	margin-right: auto;
-	margin-left: auto;
-	background-color: #ccc;
-}
 
 /* ハンバーガーメニューのスタイル */
 .hamburger {
@@ -769,16 +766,19 @@ strong {
 }
 
 .post {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 40px;
-	align-items: start;
 	padding-bottom: 80px;
 	border-bottom: 1px solid #eee;
+	display: flex;
+	gap: 40px;
+	align-items: flex-start;
 }
 
 .post:last-child {
 	border-bottom: none;
+}
+
+.post-content {
+	flex: 1;
 }
 
 .post-content h3 {
@@ -808,41 +808,129 @@ strong {
 }
 
 .post-images {
-	display: grid;
-	gap: 20px;
+	width: 280px;
+	flex-shrink: 0;
 }
 
 .post-images img {
 	width: 100%;
 	height: auto;
-	border-radius: 8px;
 }
 
 /* ブログ記事の画像レイアウト */
 .images {
 	display: grid;
-	grid-template-columns: 1fr;
-	gap: 30px;
-	margin: 40px 0;
+	grid-template-columns: 1fr 1fr;
+	gap: 40px;
+	margin: 30px 0;
+	align-items: start;
+	justify-items: center;
 }
 
-.book-cover img {
-	width: 200px;
-	height: auto;
-	margin: 0 auto;
-	display: block;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.origami-work img {
+.book-cover,
+.origami-work {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 300px;
 	width: 100%;
-	max-width: 400px;
-	height: auto;
-	margin: 0 auto;
-	display: block;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	max-width: 250px;
+}
+
+.book-cover img,
+.origami-work img {
+	height: 100%;
+	width: auto;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+/* ブログ記事のスタイル */
+.back {
+	padding: 40px 40px 20px;
+}
+
+.back a {
+	font-size: 1.7rem;
+	text-decoration: none;
+	color: currentColor;
+	opacity: 0.7;
+}
+
+.back a:hover {
+	opacity: 1;
+}
+
+.content.-edit {
+	padding-top: 20px;
+}
+
+.content.-edit .content_header {
+	margin-bottom: 80px;
+}
+
+.content.-edit .content_header_title {
+	margin-bottom: 20px;
+}
+
+.content.-edit .content_header_summary {
+	margin-top: 20px;
+}
+
+.content.-edit .content_header_summary li {
+	display: inline;
+}
+
+.content.-edit .content_header_summary li:not(:last-child)::after {
+	content: ' · ';
+}
+
+.content.-edit .content_inner > * + * {
+	margin-top: 40px;
+}
+
+.content.-edit h2 {
+	font-size: 2.6rem;
+	margin-top: 60px;
+	margin-bottom: 30px;
+}
+
+.content.-edit h2:first-child {
+	margin-top: 0;
+}
+
+.content.-edit h3 {
+	font-size: 2.2rem;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+.content.-edit p {
+	font-size: 1.7rem;
+	line-height: 1.6;
+	margin-bottom: 20px;
+}
+
+.content.-edit ul, .content.-edit ol {
+	font-size: 1.7rem;
+	line-height: 1.6;
+	margin-bottom: 20px;
+	padding-left: 0;
+}
+
+.content.-edit li {
+	display: list-item;
+	list-style-type: disc;
+	margin-left: 2rem;
+	margin-bottom: 10px;
+}
+
+.content.-edit ol li {
+	list-style-type: decimal;
+}
+
+.content.-edit strong {
+	font-weight: bold;
 }
 
 /* カメラ写真風のスタイル */
@@ -1033,16 +1121,23 @@ strong {
 
 	/* モバイル用ブログ記事画像スタイル */
 	.images {
+		grid-template-columns: 1fr;
 		gap: 20px;
-		margin: 30px 0;
+		margin: 20px 0;
+		justify-items: center;
 	}
 
-	.book-cover img {
-		width: 150px;
+	.book-cover,
+	.origami-work {
+		height: auto;
+		width: 100%;
 	}
 
+	.book-cover img,
 	.origami-work img {
-		max-width: 100%;
+		height: auto;
+		width: 100%;
+		object-fit: contain;
 	}
 
 	.camera-photo-container {
@@ -1102,13 +1197,18 @@ strong {
 	}
 
 	.post {
-		grid-template-columns: 1fr;
-		gap: 20px;
 		padding-bottom: 40px;
+		display: block;
+		gap: 0;
 	}
 
 	.post-content h3 {
 		font-size: 2rem;
+	}
+	
+	.post-images {
+		width: 100%;
+		margin-top: 20px;
 	}
 
 	.back {
@@ -1134,11 +1234,46 @@ strong {
 	}
 
 	.content.-edit .content_inner>*+* {
-		margin-top: 60px;
+		margin-top: 0;
 	}
 
 	.content.-edit .content_header_title {
 		font-size: 2.4rem;
+	}
+
+	/* モバイル用ブログ記事スタイル */
+	.back {
+		padding: 20px 20px 10px;
+	}
+
+	.back a {
+		font-size: 1.4rem;
+	}
+
+	.content.-edit .content_header {
+		margin-bottom: 40px;
+	}
+
+	.content.-edit h2 {
+		font-size: 2rem;
+		margin-top: 40px;
+		margin-bottom: 20px;
+	}
+
+	.content.-edit h3 {
+		font-size: 1.8rem;
+		margin-top: 30px;
+		margin-bottom: 15px;
+	}
+
+	.content.-edit p {
+		font-size: 1.4rem;
+		margin-bottom: 15px;
+	}
+
+	.content.-edit ul, .content.-edit ol {
+		font-size: 1.4rem;
+		margin-bottom: 15px;
 	}
 
 	.content.-edit .content_header_secondarytitle {
@@ -1154,10 +1289,6 @@ strong {
 		font-size: 2.4rem;
 	}
 
-	.content.-edit blockquote::before,
-	.content.-edit blockquote::after {
-		width: 100px;
-	}
 }
 
 /* ページネーション */
@@ -1308,8 +1439,8 @@ strong {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 36px;
-	height: 36px;
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
 	background: transparent;
 	text-decoration: none;
@@ -1322,7 +1453,7 @@ strong {
 }
 
 .sns-link span, .social-link span {
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: bold;
 	color: var(--text-light);
 	transition: color 0.3s ease;
@@ -1333,24 +1464,24 @@ strong {
 }
 
 .sns-link img, .social-link img {
-	width: 18px;
-	height: 18px;
+	width: 24px;
+	height: 24px;
 	object-fit: contain;
 }
 
 @media (max-width: 768px) {
 	.sns-link, .social-link {
-		width: 32px;
-		height: 32px;
+		width: 40px;
+		height: 40px;
 	}
 	
 	.sns-link span, .social-link span {
-		font-size: 14px;
+		font-size: 18px;
 	}
 	
 	.sns-link img, .social-link img {
-		width: 16px;
-		height: 16px;
+		width: 20px;
+		height: 20px;
 	}
 }
 

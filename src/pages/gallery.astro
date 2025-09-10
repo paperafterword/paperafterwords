@@ -1,5 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { readdir } from 'fs/promises';
+import { join } from 'path';
+
+// Get list of gallery images from images directory
+const imagesDir = join(process.cwd(), 'public/images');
+let galleryImages: string[] = [];
+
+try {
+  const folders = await readdir(imagesDir);
+  // Filter folders that contain origami.jpg
+  for (const folder of folders) {
+    const folderPath = join(imagesDir, folder);
+    try {
+      const files = await readdir(folderPath);
+      if (files.includes('origami.jpg')) {
+        galleryImages.push(folder);
+      }
+    } catch (error) {
+      // Skip if not a directory or can't read
+    }
+  }
+  galleryImages.sort();
+} catch (error) {
+  console.log('Images directory not found or empty');
+}
+
 // Gallery page for displaying origami works
 ---
 
@@ -15,8 +41,71 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <main class="content">
-      <div class="coming-soon">
-        <h2>準備中</h2>
-        <p>折り紙作品のギャラリーは準備中です。<br>近日中に公開予定です。</p>
-      </div>
+      {galleryImages.length > 0 ? (
+        <div class="gallery-grid">
+          {galleryImages.map((id) => (
+            <div class="gallery-item">
+              <img src={`/images/${id}/origami.jpg`} alt={`折り紙作品 ${id}`} />
+              <p class="gallery-caption">作品 {id}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="coming-soon">
+          <h2>準備中</h2>
+          <p>折り紙作品のギャラリーは準備中です。<br>近日中に公開予定です。</p>
+        </div>
+      )}
+    </main>
 </Layout>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .gallery-item {
+    text-align: center;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery-item img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .gallery-caption {
+    margin-top: 15px;
+    font-size: 1.4rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .gallery-item img {
+      max-width: 100%;
+    }
+
+    .gallery-caption {
+      font-size: 1.2rem;
+      margin-top: 12px;
+    }
+  }
+</style>

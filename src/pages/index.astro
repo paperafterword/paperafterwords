@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 const allPosts = await getCollection('blog');
 
 // フィーチャード記事のIDを指定（順番通りに表示）
-const featuredPostIds = ['012', '004', '011', '010', '009']; 
+const featuredPostIds = ['003', '004', '005', '002', '001']; 
 
 // フィーチャード記事を指定された順番で取得
 const posts = featuredPostIds.map(id => 
@@ -15,10 +15,9 @@ const posts = featuredPostIds.map(id =>
 
 <Layout title="Paper After Word" currentPage="top">
 
-  <img src="/origami.png" alt="origami" style="width: 30%; height: auto;"/>
-    <div class="site-header">
-      <h1>本を読んで、読んだ本を折り紙にする。</h1>
-    </div>
+  <div class="site-header">
+    <h1>本を読んで、読んだ本を折り紙にする。</h1>
+  </div>
 
     <main class="content">
         <figure class="camera-photo-container">
@@ -55,12 +54,13 @@ const posts = featuredPostIds.map(id =>
               </div>
               <p><a href={`/blog/${post.data.id || post.slug}`}>{post.data.description}</a></p>
             </div>
-            
-            <div class="post-images">
-              <a href={`/blog/${post.data.id || post.slug}`}>
-                <img src={post.data.coverImage || "/boy-making-origami-bird.png"} alt={post.data.title} />
-              </a>
-            </div>
+            {post.data.coverImage && (
+              <div class="post-images">
+                <a href={`/blog/${post.data.id || post.slug}`}>
+                  <img src={post.data.coverImage} alt={post.data.title} />
+                </a>
+              </div>
+            )}
           </article>
         ))}
       </div>
