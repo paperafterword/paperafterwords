@@ -1,3 +1,15 @@
+/* サイト全体のカラーパレット統一 */
+:root {
+	--primary-color: #8b4513;
+	--primary-hover: #a0522d;
+	--text-color: #333;
+	--text-light: #666;
+	--text-muted: #999;
+	--border-color: #e8e8e8;
+	--background-light: #fefefe;
+	--hover-bg: #e0e0e0;
+}
+
 /* リセットCSS */
 *,
 ::after,
@@ -102,13 +114,14 @@ section {
 /* リンクとボタンのスタイル */
 a {
 	position: relative;
-	color: currentColor;
+	color: var(--text-color);
 	text-decoration: underline;
-	-webkit-transition: opacity .25s;
-	transition: opacity .25s;
+	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 
 a:hover {
+	color: var(--text-color);
 	opacity: .75;
 }
 
@@ -1221,30 +1234,123 @@ strong {
 
 /* もっと見るリンク */
 .more-posts {
-	margin-top: 40px;
+	margin-top: 50px;
 	text-align: center;
 }
 
 .more-posts-link {
-	display: inline-block;
-	padding: 12px 24px;
-	background: #333;
-	color: #fff;
-	text-decoration: none;
-	border-radius: 4px;
-	font-size: 16px;
-	font-weight: bold;
-	transition: all 0.3s ease;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 8px !important;
+	padding: 0 !important;
+	background: transparent !important;
+	color: var(--text-light) !important;
+	text-decoration: none !important;
+	border: none !important;
+	border-bottom: 1px solid transparent !important;
+	border-radius: 0 !important;
+	font-size: 15px !important;
+	font-weight: 300 !important;
+	transition: all 0.3s ease !important;
+	letter-spacing: 0.3px !important;
+	position: relative !important;
 }
 
 .more-posts-link:hover {
-	background: #555;
-	transform: translateY(-2px);
+	background: transparent !important;
+	color: var(--text-color) !important;
+	border-bottom-color: var(--text-color) !important;
+	transform: translateY(-1px) !important;
+}
+
+.more-posts-link::after {
+	content: '→';
+	font-size: 14px;
+	transition: all 0.3s ease;
+	opacity: 0.7;
+}
+
+.more-posts-link:hover::after {
+	transform: translateX(3px);
+	opacity: 1;
 }
 
 @media (max-width: 768px) {
 	.more-posts-link {
-		padding: 10px 20px;
 		font-size: 14px;
 	}
 }
+
+
+/* 統一されたボタンスタイル */
+.btn-primary {
+	background: var(--text-color);
+	color: white;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 4px;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+	display: inline-block;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.btn-primary:hover {
+	background: var(--text-light);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 統一されたSNSアイコンスタイル */
+.sns-link, .social-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: transparent;
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+.sns-link:hover, .social-link:hover {
+	background: var(--hover-bg);
+	transform: translateY(-2px);
+}
+
+.sns-link span, .social-link span {
+	font-size: 16px;
+	font-weight: bold;
+	color: var(--text-light);
+	transition: color 0.3s ease;
+}
+
+.sns-link:hover span, .social-link:hover span {
+	color: var(--text-color);
+}
+
+.sns-link img, .social-link img {
+	width: 18px;
+	height: 18px;
+	object-fit: contain;
+}
+
+@media (max-width: 768px) {
+	.sns-link, .social-link {
+		width: 32px;
+		height: 32px;
+	}
+	
+	.sns-link span, .social-link span {
+		font-size: 14px;
+	}
+	
+	.sns-link img, .social-link img {
+		width: 16px;
+		height: 16px;
+	}
+}
+
