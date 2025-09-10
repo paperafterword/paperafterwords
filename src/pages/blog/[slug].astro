@@ -19,15 +19,13 @@ const { Content } = await post.render();
     <a href="/">← 一覧に戻る</a>
   </div>
 
-  <main class="contents">
-    <article class="content -edit">
-      <div class="content_inner">
-        <header class="content_header">
-          <h1 class="content_header_title">{post.data.title}</h1>
-          <ul class="content_header_summary">
-            <li>{post.data.author}</li>
-            <li>{new Date(post.data.date).toLocaleDateString('ja-JP')}</li>
-          </ul>
+  <main class="content-page">
+    <article class="content-text">
+        <header>
+          <h1>{post.data.title}</h1>
+          <div class="meta">
+            <p>{post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP')}</p>
+          </div>
         </header>
         
         <p><strong>{post.data.description}</strong></p>
@@ -44,7 +42,6 @@ const { Content } = await post.render();
         </div>
 
         <Content />
-      </div>
     </article>
   </main>
 </Layout>

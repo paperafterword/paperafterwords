@@ -12,8 +12,8 @@ import Layout from '../layouts/Layout.astro';
       <p>このサイトの運営方針と著作権に関する情報</p>
     </div>
 
-    <section class="afterword-content">
-      <div class="afterword-text">
+    <section class="content-page">
+      <div class="content-text">
         <h2>著作権・書影利用について</h2>
         <p>
           このサイトでは、書籍紹介の目的で各出版社の書影を使用させていただいております。
@@ -92,7 +92,7 @@ import Layout from '../layouts/Layout.astro';
           写真や文章は自分で撮影・執筆したものを使用しております。
         </p>
 
-        <div class="afterword-signature">
+        <div class="content-signature">
           <p>2024年1月</p>
           <p>Paper After Word</p>
         </div>
@@ -100,77 +100,3 @@ import Layout from '../layouts/Layout.astro';
     </section>
 </Layout>
 
-<style>
-  .afterword-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px;
-  }
-
-  .afterword-text {
-    line-height: 1.8;
-  }
-
-  .afterword-text h2 {
-    font-size: 2.4rem;
-    margin: 50px 0 25px 0;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px;
-  }
-
-  .afterword-text h3 {
-    font-size: 2.0rem;
-    margin: 35px 0 20px 0;
-  }
-
-  .afterword-text h4 {
-    font-size: 1.8rem;
-    margin: 25px 0 15px 0;
-  }
-
-  .afterword-text p {
-    margin-bottom: 20px;
-    color: var(--text-color);
-    line-height: 1.8;
-    font-size: 1.6rem;
-  }
-
-  .afterword-signature {
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid var(--border-color);
-    text-align: right;
-  }
-
-  .afterword-signature p {
-    margin: 5px 0;
-    color: var(--text-light);
-    font-style: italic;
-    font-size: 1.4rem;
-  }
-
-  @media (max-width: 768px) {
-    .afterword-content {
-      padding: 20px 15px;
-    }
-
-    .afterword-text h2 {
-      font-size: 2.0rem;
-      margin: 40px 0 20px 0;
-    }
-
-    .afterword-text h3 {
-      font-size: 1.8rem;
-      margin: 30px 0 15px 0;
-    }
-
-    .afterword-text h4 {
-      font-size: 1.6rem;
-      margin: 25px 0 10px 0;
-    }
-
-    .afterword-text p {
-      font-size: 1.4rem;
-    }
-  }
-</style>
