@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
   // 動的にページを生成
-  const paths = [];
+  const paths: any[] = [];
   
   // 2ページ目以降（/blog/2, /blog/3, ...）
   for (let i = 2; i <= totalPages; i++) {
@@ -39,7 +39,15 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { posts, currentPage, totalPages, hasPrevPage, hasNextPage, prevPage, nextPage } = Astro.props;
+const { posts, currentPage, totalPages, hasPrevPage, hasNextPage, prevPage, nextPage } = Astro.props as {
+  posts: any[];
+  currentPage: number;
+  totalPages: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: number;
+  nextPage: number | null;
+};
 ---
 
 <Layout title="Blog - Paper After Word" currentPage="blog">

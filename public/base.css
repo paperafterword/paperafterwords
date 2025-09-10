@@ -49,7 +49,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
 	font-weight: bold;
-	color: var(--text-color);
 }
 
 /* 基本要素のスタイル */
@@ -397,6 +396,7 @@ strong {
 .header .nav_global {
 	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
 	font-size: 2.6rem;
+	font-weight: 600;
 }
 
 .header .nav_global ul {
@@ -545,6 +545,10 @@ strong {
 	border-bottom: 1px solid #ccc;
 }
 
+.content.-edit blockquote p {
+	font-size: 2.5rem;
+}
+
 
 /* ハンバーガーメニューのスタイル */
 .hamburger {
@@ -607,6 +611,7 @@ strong {
 	display: block;
 	font-size: 1.8rem;
 	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
+	font-weight: 600;
 	text-decoration: none;
 	color: #000;
 	opacity: 0.7;
@@ -808,7 +813,7 @@ strong {
 }
 
 .post-images {
-	width: 280px;
+	width: 300px;
 	flex-shrink: 0;
 }
 
@@ -887,6 +892,16 @@ strong {
 
 .content.-edit .content_inner > * + * {
 	margin-top: 40px;
+}
+
+.content.-edit h1 {
+	font-size: 3.2rem;
+	margin-top: 60px;
+	margin-bottom: 30px;
+}
+
+.content.-edit h1:first-child {
+	margin-top: 0;
 }
 
 .content.-edit h2 {
@@ -1254,6 +1269,12 @@ strong {
 		margin-bottom: 40px;
 	}
 
+	.content.-edit h1 {
+		font-size: 2.4rem;
+		margin-top: 40px;
+		margin-bottom: 20px;
+	}
+
 	.content.-edit h2 {
 		font-size: 2rem;
 		margin-top: 40px;
@@ -1287,6 +1308,10 @@ strong {
 
 	.content.-edit blockquote {
 		font-size: 2.4rem;
+	}
+
+	.content.-edit blockquote p {
+		font-size: 2.0rem;
 	}
 
 }
