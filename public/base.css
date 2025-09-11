@@ -628,12 +628,13 @@ strong {
 
 .header_title h1 a {
 	display: block;
-	width: 350px;
-	height: 80px;
+	width: 100px;
+	height: 30px;
 	font-size: 0;
-	background: url('/paperafterword.png') center center/cover no-repeat;
+	background: url('/logo.png') center center/cover no-repeat;
 	overflow: hidden;
 	text-indent: -9999px;
+	margin-left: 10px;
 }
 
 .header_title h1 a:hover {
@@ -958,8 +959,8 @@ strong {
 	}
 
 	.header_title h1 a {
-		width: 200px;
-		height: 50px;
+		width: 70px;
+		height: 30px;
 	}
 
 	.content {
