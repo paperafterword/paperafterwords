@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Story - Paper After Word" currentPage="story">
+  <div class="back">
+    <a href="/">← トップに戻る</a>
+  </div>
+
+  <div class="page-header">
+    <h1>Story</h1>
+    <p>Paper After Wordの物語</p>
+  </div>
+
+  <main class="content">
+    <div class="story-content">
+      <section class="story-section">
+        <h2>ある読書家の悩み</h2>
+        <p>本棚に並ぶ本たち。読み終えた後、ただそこに置かれるだけの運命を辿る本たちを見ていると、どうにもその余情が空に散ってしまうように思われた。</p>
+        <p>「せっかく心に響いた物語なのに、読み終わったら終わりなんて、もったいない」</p>
+        <p>そんな想いを抱えながら、折り紙が好きな私は思った。せっかく紙がそこにあるのなら、そこに積み重なった紙の山を、静かに別の姿へと折り変えてみたいと。</p>
+      </section>
+
+      <section class="story-section">
+        <h2>一冊の本との出会い</h2>
+        <p>ある日、特に心に残った一冊の本があった。読み終えた後も、その物語の余韻が胸の中で響き続けていた。</p>
+        <p>「この感動を、形にできないだろうか」</p>
+        <p>そう思った瞬間、手が自然と動き始めた。文字はすでに胸の裡に沈み込み、その用を終えた紙は、今や形そのもののために在る。</p>
+        <p>折り紙を折りながら、その本の主人公の気持ちを思い、物語の世界観を手の中で再現していく。意味があるかどうかはわからないが、手を動かしていると、そのこと自体が少しおもしろい。</p>
+      </section>
+
+      <section class="story-section">
+        <h2>降神との偶然の出会い</h2>
+        <p>そんな折り紙と本の関係を模索していた頃、ある音楽グループに出会った。降神（おりがみ）という名の二人組。</p>
+        <p>志人と、なのるなもない。彼らの言葉と音楽は、まさに折り紙のようだった。折り、重ね、畳み、裏返し、ひらき、切り、また広げる。新しい形を生み出す。</p>
+        <p>「音楽も折り紙も、同じ構造を持っている」</p>
+        <p>ゲーテは言った。「建築は凍れる音楽である」。それならば読み終えた本の紙もまた、音楽となり、もう一度私の心に響くのだろう。</p>
+      </section>
+
+      <section class="story-section">
+        <h2>Paper After Wordの誕生</h2>
+        <p>それから私は、読み終えた本の紙を折り紙にし、本の感想と合わせてその記録を残すようになった。</p>
+        <p>一冊一冊、丁寧に。その本が私に与えてくれた感動を、今度は私が紙に込める番だ。</p>
+        <p>折り紙を折りながら、その本の主人公の気持ちを思い、物語の世界観を手の中で再現していく。意味があるかどうかはわからないが、手を動かしていると、そのこと自体が少しおもしろい。</p>
+      </section>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .story-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .story-section {
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .story-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .story-section h2 {
+    font-size: 2.4rem;
+    font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  .story-section p {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #333;
+    line-height: 1.8;
+  }
+
+  .story-section p:has-text("「") {
+    font-style: italic;
+    color: #555;
+    padding-left: 20px;
+    border-left: 3px solid #ddd;
+  }
+
+
+  @media (max-width: 768px) {
+    .story-content {
+      padding: 0 20px;
+    }
+
+    .story-section {
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+    }
+
+    .story-section h2 {
+      font-size: 2.0rem;
+      margin-bottom: 20px;
+    }
+
+    .story-section p {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+  }
+</style>
