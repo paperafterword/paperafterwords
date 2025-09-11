@@ -2,6 +2,8 @@
 id: "002"
 title: "『野火』を折らない"
 author: "大岡昇平"
+publisher: "新潮社"
+publishDate: "1951年"
 date: "2024-01-31"
 coverImage: "/images/002/cover.jpg"
 category: "読書"

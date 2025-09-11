@@ -695,6 +695,22 @@ strong {
 	margin-bottom: 20px;
 }
 
+.book-info {
+	margin-top: 10px;
+	font-size: 1.2rem;
+	opacity: 0.7;
+}
+
+.book-info p {
+	margin: 2px 0;
+	font-size: 1.2rem;
+}
+
+.book-info p:first-child {
+	font-weight: bold;
+	opacity: 0.8;
+}
+
 .post-content p {
 	font-size: 1.7rem;
 	line-height: 1.6;
@@ -989,6 +1005,14 @@ strong {
 	.post-images {
 		width: 100%;
 		margin-top: 20px;
+	}
+
+	.meta .book-info {
+		font-size: 1.1rem;
+	}
+
+	.meta .book-info p {
+		font-size: 1.1rem;
 	}
 
 	.back {
@@ -1288,6 +1312,22 @@ strong {
 	margin-bottom: 0;
 }
 
+.content-text .book-info {
+	margin-top: 10px;
+	font-size: 1.2rem;
+	opacity: 0.7;
+}
+
+.content-text .book-info p {
+	margin: 2px 0;
+	font-size: 1.2rem;
+}
+
+.content-text .book-info p:first-child {
+	font-weight: bold;
+	opacity: 0.8;
+}
+
 .content-text .images {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -1328,6 +1368,14 @@ strong {
 
 	.content-text .meta p {
 		font-size: 1.2rem;
+	}
+
+	.content-text .book-info {
+		font-size: 1.1rem;
+	}
+
+	.content-text .book-info p {
+		font-size: 1.1rem;
 	}
 
 	.content-text .images {

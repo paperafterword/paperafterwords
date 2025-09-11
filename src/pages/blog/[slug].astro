@@ -25,6 +25,13 @@ const { Content } = await post.render();
           <h1>{post.data.title}</h1>
           <div class="meta">
             <p>{post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP')}</p>
+            {post.data.publisher && (
+              <div class="book-info">
+                <p><strong>{post.data.publisher}</strong></p>
+                {post.data.translator && <p>訳：{post.data.translator}</p>}
+                {post.data.publishDate && <p>発売日：{post.data.publishDate}</p>}
+              </div>
+            )}
           </div>
         </header>
         
