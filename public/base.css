@@ -446,107 +446,9 @@ strong {
 	min-height: 50vh;
 }
 
-.content_inner {
-	max-width: 1500px;
-	margin-right: auto;
-	margin-left: auto;
-}
 
-/* コンテンツスタイル */
-.content_title {
-	font-size: 4.7rem;
-	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
-	line-height: 1.3;
-	text-transform: uppercase;
-}
 
-.content_lead {
-	max-width: 740px;
-	font-size: 1.7rem;
-	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
-}
 
-/* 記事表示用スタイル */
-.content.-edit {
-	padding-bottom: 200px;
-}
-
-.content.-edit>*+* {
-	margin-top: 200px;
-}
-
-.content.-edit .content_inner {
-	max-width: 930px;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-.content.-edit .content_inner>*+* {
-	margin-top: 80px;
-}
-
-.content.-edit .content_header {
-	line-height: 1.31;
-	text-align: center;
-}
-
-.content.-edit .content_header_title {
-	font-size: 3.2rem;
-	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
-}
-
-.content.-edit .content_header_secondarytitle {
-	margin-top: 16px;
-	font-size: 2.6rem;
-}
-
-.content.-edit .content_header_summary {
-	margin-top: 40px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	font-size: 1.4rem;
-	line-height: 1.1;
-	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
-	opacity: .15;
-}
-
-.content.-edit .content_header_summary>*+* {
-	margin-left: 1em;
-}
-
-/* 記事内の要素スタイル */
-.content.-edit strong {
-	font-weight: bold;
-	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
-}
-
-.content.-edit figcaption {
-	margin-top: 10px;
-	font-size: 1.4rem;
-}
-
-.content.-edit img {
-	max-width: 100%;
-	height: auto;
-}
-
-.content.-edit blockquote {
-	text-align: center;
-	line-height: 1.31;
-	font-size: 3.2rem;
-	margin: 40px 0;
-	padding: 40px 0;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
-.content.-edit blockquote p {
-	font-size: 2.5rem;
-}
 
 
 /* ハンバーガーメニューのスタイル */
@@ -626,13 +528,11 @@ strong {
 }
 
 /* 共通ページスタイル */
-.site-header,
 .page-header {
 	text-align: center;
 	padding: 80px 0 0;
 }
 
-.site-header h1,
 .page-header h1 {
 	font-size: 4.7rem;
 	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
@@ -643,7 +543,6 @@ strong {
 	letter-spacing: 2px;
 }
 
-.site-header p,
 .page-header p {
 	font-size: 1.7rem;
 	font-family: "Helvetica Neue", "游ゴシック体 Pr6N B", "Yu Gothic Pr6N B", sans-serif;
@@ -678,16 +577,6 @@ strong {
 	height: auto;
 }
 
-/* Xアイコンのスタイル */
-.twitter-icon {
-	font-size: inherit !important;
-	opacity: 1;
-	transition: opacity 0.3s ease;
-}
-
-.twitter-icon:hover {
-	opacity: 0.7;
-}
 
 /* セクションスタイル */
 .section {
@@ -864,87 +753,6 @@ strong {
 	opacity: 1;
 }
 
-.content.-edit {
-	padding-top: 20px;
-}
-
-.content.-edit .content_header {
-	margin-bottom: 80px;
-}
-
-.content.-edit .content_header_title {
-	margin-bottom: 20px;
-}
-
-.content.-edit .content_header_summary {
-	margin-top: 20px;
-}
-
-.content.-edit .content_header_summary li {
-	display: inline;
-}
-
-.content.-edit .content_header_summary li:not(:last-child)::after {
-	content: ' · ';
-}
-
-.content.-edit .content_inner > * + * {
-	margin-top: 40px;
-}
-
-.content.-edit h1 {
-	font-size: 3.2rem;
-	margin-top: 60px;
-	margin-bottom: 30px;
-}
-
-.content.-edit h1:first-child {
-	margin-top: 0;
-}
-
-.content.-edit h2 {
-	font-size: 2.6rem;
-	margin-top: 60px;
-	margin-bottom: 30px;
-}
-
-.content.-edit h2:first-child {
-	margin-top: 0;
-}
-
-.content.-edit h3 {
-	font-size: 2.2rem;
-	margin-top: 50px;
-	margin-bottom: 20px;
-}
-
-.content.-edit p {
-	font-size: 1.7rem;
-	line-height: 1.6;
-	margin-bottom: 20px;
-}
-
-.content.-edit ul, .content.-edit ol {
-	font-size: 1.7rem;
-	line-height: 1.6;
-	margin-bottom: 20px;
-	padding-left: 0;
-}
-
-.content.-edit li {
-	display: list-item;
-	list-style-type: disc;
-	margin-left: 2rem;
-	margin-bottom: 10px;
-}
-
-.content.-edit ol li {
-	list-style-type: decimal;
-}
-
-.content.-edit strong {
-	font-weight: bold;
-}
 
 /* カメラ写真風のスタイル */
 .camera-photo-container {
@@ -979,31 +787,6 @@ strong {
 	font-style: normal;
 }
 
-/* 哲学的セクション */
-.philosophy-section {
-	margin: 40px 0;
-	padding: 30px;
-	background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-	border-left: 4px solid #6c757d;
-}
-
-.philosophy-text {
-	font-size: 1.6rem;
-	line-height: 1.8;
-	color: #495057;
-	margin-bottom: 25px;
-	font-style: italic;
-	text-align: center;
-}
-
-.philosophy-quote {
-	font-size: 1.4rem;
-	line-height: 1.6;
-	color: #6c757d;
-	text-align: center;
-	font-style: italic;
-	margin: 0;
-}
 
 .back {
 	padding: 40px 40px 0;
@@ -1085,12 +868,10 @@ strong {
 		margin-top: 2px;
 	}
 
-	.site-header,
 	.page-header {
 		padding: 40px 0;
 	}
 
-	.site-header h1,
 	.page-header h1 {
 		font-size: 3rem;
 		margin-bottom: 0;
@@ -1171,20 +952,6 @@ strong {
 		margin-top: 6px;
 	}
 
-	.philosophy-section {
-		margin: 30px 0;
-		padding: 20px;
-	}
-
-	.philosophy-text {
-		font-size: 1.4rem;
-		line-height: 1.6;
-		margin-bottom: 20px;
-	}
-
-	.philosophy-quote {
-		font-size: 1.2rem;
-	}
 
 	.header_title {
 		margin-right: 15px;
@@ -1233,83 +1000,8 @@ strong {
 		padding: 0 15px;
 	}
 
-	.content_title {
-		font-size: 3rem;
-	}
 
-	.content.-edit {
-		padding-bottom: 120px;
-	}
 
-	.content.-edit>*+* {
-		margin-top: 120px;
-	}
-
-	.content.-edit .content_inner>*+* {
-		margin-top: 0;
-	}
-
-	.content.-edit .content_header_title {
-		font-size: 2.4rem;
-	}
-
-	/* モバイル用ブログ記事スタイル */
-	.back {
-		padding: 20px 20px 10px;
-	}
-
-	.back a {
-		font-size: 1.4rem;
-	}
-
-	.content.-edit .content_header {
-		margin-bottom: 40px;
-	}
-
-	.content.-edit h1 {
-		font-size: 2.4rem;
-		margin-top: 40px;
-		margin-bottom: 20px;
-	}
-
-	.content.-edit h2 {
-		font-size: 2rem;
-		margin-top: 40px;
-		margin-bottom: 20px;
-	}
-
-	.content.-edit h3 {
-		font-size: 1.8rem;
-		margin-top: 30px;
-		margin-bottom: 15px;
-	}
-
-	.content.-edit p {
-		font-size: 1.4rem;
-		margin-bottom: 15px;
-	}
-
-	.content.-edit ul, .content.-edit ol {
-		font-size: 1.4rem;
-		margin-bottom: 15px;
-	}
-
-	.content.-edit .content_header_secondarytitle {
-		font-size: 2rem;
-	}
-
-	.content.-edit .content_header_summary {
-		margin-top: 20px;
-		font-size: 1.2rem;
-	}
-
-	.content.-edit blockquote {
-		font-size: 2.4rem;
-	}
-
-	.content.-edit blockquote p {
-		font-size: 2.0rem;
-	}
 
 }
 
