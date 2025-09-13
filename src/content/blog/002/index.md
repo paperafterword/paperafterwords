@@ -5,7 +5,7 @@ author: "大岡昇平"
 publisher: "新潮社"
 category: "読書"
 tags: ["戦争文学", "フィリピン", "人間性", "再読"]
-description: "大岡昇平の名作『野火』。戦争の残酷さと人間の本質を描いた傑作。"
+description: "大岡昇平の名作『野火』。戦争の残酷さと人間の本質を描いた作品。面白い。"
 images:
   bookCover: "/images/002/cover.jpg"
 ---
