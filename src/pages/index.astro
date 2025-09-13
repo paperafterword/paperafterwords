@@ -49,13 +49,11 @@ const posts = featuredPostIds.map(id =>
             <div class="post-content">
               <h3><a href={`/blog/${post.data.id || post.slug}`}>{post.data.title}</a></h3>
               <div class="meta">
-                {post.data.author}
-                {post.data.translator && <span>（訳：{post.data.translator}）</span>}
-                {post.data.publisher && (
-                  <div class="book-info">
-                    <p>{post.data.publisher}</p>
-                  </div>
-                )}
+                <span class="author-info">
+                  {post.data.author}
+                  {post.data.translator && <span>（訳：{post.data.translator}）</span>}
+                  {post.data.publisher && <span class="publisher"> / {post.data.publisher}</span>}
+                </span>
               </div>
               <p><a href={`/blog/${post.data.id || post.slug}`}>{post.data.description}</a></p>
             </div>
