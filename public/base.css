@@ -664,6 +664,7 @@ strong {
 	display: flex;
 	gap: 40px;
 	align-items: flex-start;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .post:last-child {
@@ -1876,4 +1877,6 @@ strong {
 		height: 150px;
 	}
 }
+
+
 
