@@ -12,43 +12,81 @@ export async function getStaticPaths() {
 
 const post = Astro.props as any;
 const { Content } = await post.render();
+
+// 他の作品を取得（現在の作品を除く、折り紙作品があるもののみ）
+const allPosts = await getCollection('blog');
+const otherPosts = allPosts
+  .filter(p => (p.data.id || p.slug) !== (post.data.id || post.slug))
+  .filter(p => p.data.images?.origami && !p.data.title.includes('を折らない'))
+  .sort((a, b) => parseInt(b.data.id || b.slug) - parseInt(a.data.id || a.slug))
+  .slice(0, 4); // 最大4つまで表示
 ---
 
 <Layout title={`${post.data.title} - Paper After Word`} currentPage="blog">
   <div class="back">
-    <a href="/">← 一覧に戻る</a>
+    <a href="/blog">← 一覧に戻る</a>
   </div>
 
   <main class="content-page">
     <article class="content-text">
         <header>
           <h1>{post.data.title}</h1>
-          <div class="meta">
-            <p>{post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP')}</p>
-            {post.data.publisher && (
-              <div class="book-info">
-                <p><strong>{post.data.publisher}</strong></p>
-                {post.data.translator && <p>訳：{post.data.translator}</p>}
-                {post.data.publishDate && <p>発売日：{post.data.publishDate}</p>}
+        </header>
+        
+        <p>{post.data.description}</p>
+
+        {post.data.images?.origami && (
+          <div class="origami-showcase">
+            <img src={post.data.images.origami} alt="折り紙作品" loading="lazy" decoding="async" />
+          </div>
+        )}
+
+        {post.data.images?.bookCover && (
+          <div class="book-card">
+            {post.data.amazonUrl ? (
+              <a href={post.data.amazonUrl} target="_blank" rel="noopener noreferrer" class="book-card-link">
+                <div class="book-cover">
+                  <img src={post.data.images.bookCover} alt="本の表紙" loading="lazy" decoding="async" />
+                </div>
+                <div class="book-info">
+                  <h3>{post.data.title.replace('を折らない', '').replace('を折る', '').replace(/『|』/g, '')}</h3>
+                  <p class="author">{post.data.author}</p>
+                  {post.data.publisher && <p class="publisher">{post.data.publisher}</p>}
+                </div>
+              </a>
+            ) : (
+              <div class="book-card-content">
+                <div class="book-cover">
+                  <img src={post.data.images.bookCover} alt="本の表紙" loading="lazy" decoding="async" />
+                </div>
+                <div class="book-info">
+                  <h3>{post.data.title.replace('を折らない', '').replace('を折る', '').replace(/『|』/g, '')}</h3>
+                  <p class="author">{post.data.author}</p>
+                  {post.data.publisher && <p class="publisher">{post.data.publisher}</p>}
+                </div>
               </div>
             )}
           </div>
-        </header>
-        
-        <p><strong>{post.data.description}</strong></p>
-
-        <div class="images">
-          <div class="book-cover">
-            <img src={post.data.coverImage || "/images/default/no-cover.svg"} alt="本の表紙" />
-          </div>
-          {post.data.origamiImage && (
-            <div class="origami-work">
-              <img src={post.data.origamiImage} alt="折り紙作品" />
-            </div>
-          )}
-        </div>
+        )}
 
         <Content />
     </article>
+
+    <!-- 他の作品を見る -->
+    {otherPosts.length > 0 && (
+      <section class="other-works">
+        <div class="other-works-grid">
+          {otherPosts.map((otherPost) => (
+            <div class="other-work-item">
+              <a href={`/blog/${otherPost.data.id || otherPost.slug}`} class="other-work-link">
+                <div class="other-work-image">
+                  <img src={otherPost.data.images.origami} alt={`${otherPost.data.title}の折り紙作品`} />
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
   </main>
 </Layout>

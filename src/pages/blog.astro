@@ -29,10 +29,6 @@ const nextPage = currentPage + 1;
 ---
 
 <Layout title="Blog - Paper After Word" currentPage="blog">
-  <div class="back">
-    <a href="/">← トップに戻る</a>
-  </div>
-
   <div class="page-header">
     <h1>Blog</h1>
     <p>本を読んで、読んだ本を折り紙にする。</p>
@@ -45,15 +41,21 @@ const nextPage = currentPage + 1;
           <div class="post-content">
             <h3><a href={`/blog/${post.data.id || post.slug}`}>{post.data.title}</a></h3>
             <div class="meta">
-              {post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'numeric', day: 'numeric' })}
+              <span class="author-info">
+                {post.data.author}
+                {post.data.translator && <span>（訳：{post.data.translator}）</span>}
+                {post.data.publisher && <span class="publisher"> / {post.data.publisher}</span>}
+              </span>
             </div>
             <p><a href={`/blog/${post.data.id || post.slug}`}>{post.data.description}</a></p>
           </div>
-          <div class="post-images">
-            <a href={`/blog/${post.data.id || post.slug}`}>
-              <img src={post.data.coverImage || "/images/default/no-cover.svg"} alt={post.data.title} />
-            </a>
-          </div>
+          {post.data.images?.bookCover && (
+            <div class="post-images">
+              <a href={`/blog/${post.data.id || post.slug}`}>
+                <img src={post.data.images.bookCover} alt={post.data.title} loading="lazy" decoding="async" />
+              </a>
+            </div>
+          )}
         </article>
       ))}
     </div>

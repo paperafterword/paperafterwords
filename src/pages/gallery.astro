@@ -1,54 +1,63 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { readdir } from 'fs/promises';
-import { join } from 'path';
+import { getCollection } from 'astro:content';
 
-// Get list of gallery images from images directory
-const imagesDir = join(process.cwd(), 'public/images');
-let galleryImages: string[] = [];
+// Get blog posts to match with gallery images
+const allPosts = await getCollection('blog');
 
-try {
-  const folders = await readdir(imagesDir);
-  // Filter folders that contain origami.jpg
-  for (const folder of folders) {
-    const folderPath = join(imagesDir, folder);
-    try {
-      const files = await readdir(folderPath);
-      if (files.includes('origami.jpg')) {
-        galleryImages.push(folder);
-      }
-    } catch (error) {
-      // Skip if not a directory or can't read
-    }
+let galleryItems: Array<{
+  id: string;
+  title: string;
+  author: string;
+  publisher?: string;
+  description: string;
+  imagePath: string;
+  tags: string[];
+}> = [];
+
+// Get gallery items from blog posts that have origami images
+// 折った本のみを対象とする
+for (const post of allPosts) {
+  if (post.data.images?.origami && !post.data.title.includes('を折らない')) {
+    galleryItems.push({
+      id: post.data.id || post.slug,
+      title: post.data.title,
+      author: post.data.author,
+      publisher: post.data.publisher,
+      description: post.data.description,
+      imagePath: post.data.images.origami,
+      tags: post.data.tags || []
+    });
   }
-  galleryImages.sort();
-} catch (error) {
-  console.log('Images directory not found or empty');
 }
+
+// Sort by ID (newest first)
+galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
 
 // Gallery page for displaying origami works
 ---
 
 <Layout title="Gallery - Paper After Word" currentPage="gallery">
 
-    <div class="back">
-      <a href="/">← トップに戻る</a>
-    </div>
-
     <div class="page-header">
       <h1>Gallery</h1>
-      <p>折り紙作品のギャラリー</p>
+      <p>本を読んで、読んだ本を折り紙にする。</p>
     </div>
 
     <main class="content">
-      {galleryImages.length > 0 ? (
-        <div class="gallery-grid">
-          {galleryImages.map((id) => (
-            <div class="gallery-item">
-              <img src={`/images/${id}/origami.jpg`} alt={`折り紙作品 ${id}`} />
-              <p class="gallery-caption">作品 {id}</p>
+      {galleryItems.length > 0 ? (
+        <div class="gallery-container">
+          <section class="gallery-section">
+            <div class="gallery-grid">
+              {galleryItems.map((item) => (
+                <div class="gallery-item">
+                  <a href={`/blog/${item.id}`} class="gallery-link">
+                    <img src={item.imagePath} alt={`${item.title}の折り紙作品`} class="gallery-image" />
+                  </a>
+                </div>
+              ))}
             </div>
-          ))}
+          </section>
         </div>
       ) : (
         <div class="coming-soon">
@@ -57,55 +66,4 @@ try {
         </div>
       )}
     </main>
-</Layout>
-
-<style>
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    margin-top: 60px;
-  }
-
-  .gallery-item {
-    text-align: center;
-  }
-
-  .gallery-item img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .gallery-item img:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .gallery-caption {
-    margin-top: 15px;
-    font-size: 1.4rem;
-    color: var(--text-light);
-    font-weight: 500;
-  }
-
-  @media (max-width: 768px) {
-    .gallery-grid {
-      grid-template-columns: 1fr;
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .gallery-item img {
-      max-width: 100%;
-    }
-
-    .gallery-caption {
-      font-size: 1.2rem;
-      margin-top: 12px;
-    }
-  }
-</style>
+  </Layout>
