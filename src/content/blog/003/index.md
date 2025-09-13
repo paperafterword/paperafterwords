@@ -8,6 +8,7 @@ tags: ["現代文学", "意識の流れ", "精神分析", "再読"]
 description: "ズヴェーヴォの名作『ゼーノの意識（上）』。意識の流れを精緻に描き出した代表作。"
 images:
   bookCover: "/images/003/cover.jpg"
+amazonUrl: "https://www.amazon.co.jp/dp/4003770099?&linkCode=ll1&tag=paperafterwor-22&linkId=ba3ce8496402a1a2a87627de774898e2&language=ja_JP&ref_=as_li_ss_tl"
 ---
 
 ## 本の感想

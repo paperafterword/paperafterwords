@@ -62,7 +62,7 @@ const posts = featuredPostIds.map(id =>
             {post.data.images?.bookCover && (
               <div class="post-images">
                 <a href={`/blog/${post.data.id || post.slug}`}>
-                  <img src={post.data.images.bookCover} alt={post.data.title} />
+                  <img src={post.data.images.bookCover} alt={post.data.title} loading="lazy" decoding="async" />
                 </a>
               </div>
             )}

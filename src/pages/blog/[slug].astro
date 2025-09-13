@@ -39,17 +39,29 @@ const { Content } = await post.render();
         <div class="images">
           {post.data.images?.bookCover && (
             <div class="book-cover">
-              <img src={post.data.images.bookCover} alt="本の表紙" />
+              <img src={post.data.images.bookCover} alt="本の表紙" loading="lazy" decoding="async" />
             </div>
           )}
           {post.data.images?.origami && (
             <div class="origami-work">
-              <img src={post.data.images.origami} alt="折り紙作品" />
+              <img src={post.data.images.origami} alt="折り紙作品" loading="lazy" decoding="async" />
             </div>
           )}
         </div>
 
         <Content />
+
+        {post.data.amazonUrl && (
+          <p class="amazon-link">
+            <a href={post.data.amazonUrl} target="_blank" rel="noopener noreferrer">{post.data.title.replace('を折らない', '').replace('を折る', '')}をAmazonで購入</a>
+          </p>
+        )}
     </article>
   </main>
 </Layout>
+
+<style>
+  .amazon-link {
+    margin-top: 50px;
+  }
+</style>
