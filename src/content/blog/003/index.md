@@ -1,15 +1,13 @@
 ---
 id: "003"
 title: "『ゼーノの意識（上）』を折らない"
-author: "ズヴェーヴォ"
-translator: "関口英子"
+author: "ズヴェーヴォ, 訳：関口英子"
 publisher: "岩波書店"
-publishDate: "2003年"
-date: "2024-02-15"
-coverImage: "/images/003/cover.jpg"
 category: "読書"
 tags: ["現代文学", "意識の流れ", "精神分析", "再読"]
 description: "ズヴェーヴォの名作『ゼーノの意識（上）』。意識の流れを精緻に描き出した代表作。"
+images:
+  bookCover: "/images/003/cover.jpg"
 ---
 
 ## 本の感想

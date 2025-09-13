@@ -22,7 +22,7 @@ const posts = featuredPostIds.map(id =>
 
     <main class="content">
         <figure class="camera-photo-container">
-          <img src="/zatto.png" alt="雑踏" class="camera-photo" />
+          <img src="/assets/zatto.png" alt="雑踏" class="camera-photo" />
           <figcaption class="photo-caption">
             « Fais ce que voudras.» 汝の欲するところを為せ
             <span class="quote-author">— フランソワ・ラブレー</span>
@@ -37,7 +37,7 @@ const posts = featuredPostIds.map(id =>
           意味があるかどうかはわからないが、手を動かしていると、そのこと自体が少しおもしろい。</p>
         
           <a href="/story" class="more-posts-link">
-            ストーリーを読む
+            あらすじを読む
           </a>
       </div>
 
@@ -49,21 +49,20 @@ const posts = featuredPostIds.map(id =>
             <div class="post-content">
               <h3><a href={`/blog/${post.data.id || post.slug}`}>{post.data.title}</a></h3>
               <div class="meta">
-                {post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP')}
+                {post.data.author}
+                {post.data.translator && <span>（訳：{post.data.translator}）</span>}
                 {post.data.publisher && (
                   <div class="book-info">
                     <p>{post.data.publisher}</p>
-                    {post.data.translator && <p>訳：{post.data.translator}</p>}
-                    {post.data.publishDate && <p>発売日：{post.data.publishDate}</p>}
                   </div>
                 )}
               </div>
               <p><a href={`/blog/${post.data.id || post.slug}`}>{post.data.description}</a></p>
             </div>
-            {post.data.coverImage && (
+            {post.data.images?.bookCover && (
               <div class="post-images">
                 <a href={`/blog/${post.data.id || post.slug}`}>
-                  <img src={post.data.coverImage} alt={post.data.title} />
+                  <img src={post.data.images.bookCover} alt={post.data.title} />
                 </a>
               </div>
             )}
@@ -97,7 +96,7 @@ const posts = featuredPostIds.map(id =>
             <span class="sns-icon">𝕏</span>
           </a>
           <a href="https://jp.pinterest.com/paperafterword/" target="_blank" rel="noopener noreferrer" class="sns-link">
-            <img src="/pinterest.png" alt="Pinterest" class="sns-icon">
+            <img src="/assets/pinterest.png" alt="Pinterest" class="sns-icon">
           </a>
         </div>
       </section>

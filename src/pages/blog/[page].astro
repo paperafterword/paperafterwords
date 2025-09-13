@@ -71,11 +71,13 @@ const { posts, currentPage, totalPages, hasPrevPage, hasNextPage, prevPage, next
             </div>
             <p><a href={`/blog/${post.data.id || post.slug}`}>{post.data.description}</a></p>
           </div>
-          <div class="post-images">
-            <a href={`/blog/${post.data.id || post.slug}`}>
-              <img src={post.data.coverImage || "/images/default/no-cover.svg"} alt={post.data.title} />
-            </a>
-          </div>
+          {post.data.images?.bookCover && (
+            <div class="post-images">
+              <a href={`/blog/${post.data.id || post.slug}`}>
+                <img src={post.data.images.bookCover} alt={post.data.title} />
+              </a>
+            </div>
+          )}
         </article>
       ))}
     </div>

@@ -1,14 +1,14 @@
 ---
 id: "005"
 title: "『折り紙の事典』を折る"
-author: "岡村昌夫、三浦公亮、前川淳、西川誠司、山口真、松浦英子、小松英夫"
-date: "2024-11-01"
-origamiImage: "/images/005/origami.jpg"
+author: "岡村昌夫・三浦公亮（監修）"
+publisher: "朝倉書店"
 category: "読書"
 tags: ["折り紙", "事典", "技術", "実用"]
 description: "折り紙の技術と歴史を網羅した事典。折り紙愛好家必携の一冊。"
-status: "折った"
-origamiType: "鶴"
+images:
+  bookCover:
+  origami: "/images/005/origami.png"
 ---
 
 ## 本の感想

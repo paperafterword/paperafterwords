@@ -24,12 +24,11 @@ const { Content } = await post.render();
         <header>
           <h1>{post.data.title}</h1>
           <div class="meta">
-            <p>{post.data.author} · {new Date(post.data.date).toLocaleDateString('ja-JP')}</p>
+            <p>{post.data.author}
+            {post.data.translator && <span>（訳：{post.data.translator}）</span>}</p>
             {post.data.publisher && (
               <div class="book-info">
                 <p><strong>{post.data.publisher}</strong></p>
-                {post.data.translator && <p>訳：{post.data.translator}</p>}
-                {post.data.publishDate && <p>発売日：{post.data.publishDate}</p>}
               </div>
             )}
           </div>
@@ -38,12 +37,14 @@ const { Content } = await post.render();
         <p><strong>{post.data.description}</strong></p>
 
         <div class="images">
-          <div class="book-cover">
-            <img src={post.data.coverImage || "/images/default/no-cover.svg"} alt="本の表紙" />
-          </div>
-          {post.data.origamiImage && (
+          {post.data.images?.bookCover && (
+            <div class="book-cover">
+              <img src={post.data.images.bookCover} alt="本の表紙" />
+            </div>
+          )}
+          {post.data.images?.origami && (
             <div class="origami-work">
-              <img src={post.data.origamiImage} alt="折り紙作品" />
+              <img src={post.data.images.origami} alt="折り紙作品" />
             </div>
           )}
         </div>

@@ -3,12 +3,11 @@ id: "004"
 title: "『他人の顔』を折らない"
 author: "安部公房"
 publisher: "新潮社"
-publishDate: "1968年12月24日"
-date: "2024-01-30"
-coverImage: "/images/004/cover.jpg"
 category: "読書"
 tags: ["現代文学", "アイデンティティ", "仮面", "再読"]
 description: "安部公房の名作『他人の顔』。アイデンティティと仮面の関係を描いた傑作。"
+images:
+  bookCover: "/images/004/cover.jpg"
 ---
 
 ## 本の感想

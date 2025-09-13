@@ -844,7 +844,7 @@ strong {
 	}
 
 	.wrapper {
-		padding: 0 15px;
+		padding: 0;
 	}
 
 	.header {
@@ -1020,9 +1020,9 @@ strong {
 	}
 
 	.contents {
-		margin-left: -15px;
-		margin-right: -15px;
-		padding: 0 15px;
+		margin-left: 0;
+		margin-right: 0;
+		padding: 0;
 	}
 
 
@@ -1383,12 +1383,15 @@ strong {
 		gap: 20px;
 		margin: 20px 0;
 		justify-items: center;
+		padding: 0;
 	}
 
 	.content-text .book-cover,
 	.content-text .origami-work {
 		height: auto;
 		width: 100%;
+		padding: 0 15px;
+		max-width: none;
 	}
 
 	.content-text .book-cover img,

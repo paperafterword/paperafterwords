@@ -1,16 +1,13 @@
 ---
 id: "001"
 title: "『心臓を貫かれて 上』を折らない"
-author: "マイケル・ギルモア"
-translator: "村上春樹"
+author: "マイケル・ギルモア, 訳：村上春樹"
 publisher: "文藝春秋"
-publishDate: "1999年10月08日"
-date: "2024-02-01"
 category: "読書"
 tags: ["ノンフィクション", "音楽", "再読"]
 description: "マイケル・ギルモアの名作『心臓を貫かれて 上』。音楽と人生を描いた傑作。"
-status: "折らない"
-reason: "また読むから"
+images:
+  bookCover:
 ---
 
 ## 本の感想
