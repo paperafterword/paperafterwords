@@ -1164,7 +1164,7 @@ strong {
 	gap: 8px;
 	padding: 0;
 	background: transparent;
-	color: rgb(241, 198, 94);
+	color: var(--text-secondary);
 	text-decoration: none;
 	border: none;
 	border-bottom: 1px solid transparent;

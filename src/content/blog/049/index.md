@@ -1,5 +1,5 @@
 ---
-id: "007"
+id: "049"
 title: "『BUTTER』を折る"
 author: "柚木麻子"
 publisher: "新潮社"
@@ -7,8 +7,11 @@ category: "読書"
 tags: ["小説", "現代文学", "家族", "料理", "人間関係"]
 description: "料理を通じて描かれる家族の絆と人間関係の複雑さ。柚木麻子の新作小説。"
 images:
-  bookCover: "/images/007/cover.jpg"
-  origami: []
+  bookCover: "/images/049/cover.jpg"
+  origami:
+    - "/images/005/Photo_25-09-13-13-06-24.375.jpg"
+    - "/images/005/Photo_25-09-13-13-06-24.157.jpg"
+    - "/images/005/Photo_25-09-13-13-06-24.283.jpg"
 ---
 
 ## 本の感想
