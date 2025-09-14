@@ -38,22 +38,27 @@ const otherPosts = allPosts
         {post.data.images?.origami && (
           <div class="origami-showcase">
             {Array.isArray(post.data.images.origami) ? (
-              post.data.images.origami.map((origamiImage, index) => (
+              <div class="origami-grid">
+                {post.data.images.origami.map((origamiImage, index) => (
+                  <div class="origami-item" key={index}>
+                    <img 
+                      src={origamiImage} 
+                      alt={`折り紙作品 ${index + 1}`} 
+                      loading="lazy" 
+                      decoding="async" 
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div class="origami-single">
                 <img 
-                  key={index}
-                  src={origamiImage} 
-                  alt={`折り紙作品 ${index + 1}`} 
+                  src={post.data.images.origami} 
+                  alt="折り紙作品" 
                   loading="lazy" 
                   decoding="async" 
                 />
-              ))
-            ) : (
-              <img 
-                src={post.data.images.origami} 
-                alt="折り紙作品" 
-                loading="lazy" 
-                decoding="async" 
-              />
+              </div>
             )}
           </div>
         )}
@@ -97,7 +102,12 @@ const otherPosts = allPosts
             <div class="other-work-item">
               <a href={`/blog/${otherPost.data.id || otherPost.slug}`} class="other-work-link">
                 <div class="other-work-image">
-                  <img src={otherPost.data.images.origami} alt={`${otherPost.data.title}の折り紙作品`} />
+                  <img 
+                    src={Array.isArray(otherPost.data.images.origami) 
+                      ? otherPost.data.images.origami[0] 
+                      : otherPost.data.images.origami} 
+                    alt={`${otherPost.data.title}の折り紙作品`} 
+                  />
                 </div>
               </a>
             </div>
