@@ -8,7 +8,7 @@ tags: ["小説", "現代文学", "家族", "料理", "人間関係"]
 description: "料理を通じて描かれる家族の絆と人間関係の複雑さ。柚木麻子の新作小説。"
 images:
   bookCover: "/images/007/cover.jpg"
-  origami: ""
+  origami: []
 ---
 
 ## 本の感想

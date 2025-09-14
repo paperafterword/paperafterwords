@@ -37,7 +37,24 @@ const otherPosts = allPosts
 
         {post.data.images?.origami && (
           <div class="origami-showcase">
-            <img src={post.data.images.origami} alt="折り紙作品" loading="lazy" decoding="async" />
+            {Array.isArray(post.data.images.origami) ? (
+              post.data.images.origami.map((origamiImage, index) => (
+                <img 
+                  key={index}
+                  src={origamiImage} 
+                  alt={`折り紙作品 ${index + 1}`} 
+                  loading="lazy" 
+                  decoding="async" 
+                />
+              ))
+            ) : (
+              <img 
+                src={post.data.images.origami} 
+                alt="折り紙作品" 
+                loading="lazy" 
+                decoding="async" 
+              />
+            )}
           </div>
         )}
 

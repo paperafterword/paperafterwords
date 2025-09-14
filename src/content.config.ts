@@ -13,7 +13,7 @@ const blog = defineCollection({
     description: z.string(),
     images: z.object({
       bookCover: z.string().optional(),
-      origami: z.string().optional(),
+      origami: z.union([z.string(), z.array(z.string())]).optional(),
     }),
   }),
 });

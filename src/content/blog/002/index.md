@@ -8,7 +8,7 @@ tags: ["戦争文学", "フィリピン", "人間性", "再読"]
 description: "大岡昇平の名作『野火』。戦争の残酷さと人間の本質を描いた作品。やはり持つ物は持つべきだね。"
 images:
   bookCover: "/images/002/cover.jpg"
-  origami: ""
+  origami: []
 ---
 
 この作品を読んで思い出したことがある。

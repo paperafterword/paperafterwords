@@ -19,15 +19,21 @@ let galleryItems: Array<{
 // 折った本のみを対象とする
 for (const post of allPosts) {
   if (post.data.images?.origami && !post.data.title.includes('を折らない')) {
-    galleryItems.push({
-      id: post.data.id || post.slug,
-      title: post.data.title,
-      author: post.data.author,
-      publisher: post.data.publisher,
-      description: post.data.description,
-      imagePath: post.data.images.origami,
-      tags: post.data.tags || []
-    });
+    const origamiImages = Array.isArray(post.data.images.origami) 
+      ? post.data.images.origami 
+      : [post.data.images.origami];
+    
+    if (origamiImages.length > 0) {
+      galleryItems.push({
+        id: post.data.id || post.slug,
+        title: post.data.title,
+        author: post.data.author,
+        publisher: post.data.publisher,
+        description: post.data.description,
+        imagePath: origamiImages[0], // 最初の折り紙画像を使用
+        tags: post.data.tags || []
+      });
+    }
   }
 }
 

@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 const allPosts = await getCollection('blog');
 
 // フィーチャード記事のIDを指定（順番通りに表示）
-const featuredPostIds = ['007', '008', '006', '004', '003', '002']; 
+const featuredPostIds = ['007', '008', '006', '004']; 
 
 // フィーチャード記事を指定された順番で取得
 const posts = featuredPostIds.map(id => 
@@ -26,15 +26,21 @@ let galleryItems: Array<{
 // 折り紙作品がある投稿のみを対象とする
 for (const post of allPosts) {
   if (post.data.images?.origami && !post.data.title.includes('を折らない')) {
-    galleryItems.push({
-      id: post.data.id || post.slug,
-      title: post.data.title,
-      author: post.data.author,
-      publisher: post.data.publisher,
-      description: post.data.description,
-      imagePath: post.data.images.origami,
-      tags: post.data.tags || []
-    });
+    const origamiImages = Array.isArray(post.data.images.origami) 
+      ? post.data.images.origami 
+      : [post.data.images.origami];
+    
+    if (origamiImages.length > 0) {
+      galleryItems.push({
+        id: post.data.id || post.slug,
+        title: post.data.title,
+        author: post.data.author,
+        publisher: post.data.publisher,
+        description: post.data.description,
+        imagePath: origamiImages[0], // 最初の折り紙画像を使用
+        tags: post.data.tags || []
+      });
+    }
   }
 }
 
@@ -71,7 +77,8 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
       </div>
 
 
-      <h2 id="blog" class="section-title">作品一覧</h2>      
+      <h2 id="blog" class="section-title">作品一覧</h2>    
+      <p>クリックして作品を見る</p>  
       <div class="posts">
         {posts.map((post) => (
           <article class="post">
