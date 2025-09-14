@@ -1576,7 +1576,6 @@ strong {
 .story-section {
 	margin-bottom: 60px;
 	padding-bottom: 40px;
-	border-bottom: 1px solid var(--border-color);
 }
 
 .story-section:last-child {

@@ -5,12 +5,41 @@ import Layout from '../layouts/Layout.astro';
 const allPosts = await getCollection('blog');
 
 // フィーチャード記事のIDを指定（順番通りに表示）
-const featuredPostIds = ['006', '004', '005', '002']; 
+const featuredPostIds = ['006', '004', '005', '002','001']; 
 
 // フィーチャード記事を指定された順番で取得
 const posts = featuredPostIds.map(id => 
   allPosts.find(post => post.data.id === id)
 ).filter(Boolean); // undefinedを除外
+
+// Gallery用の折り紙作品を取得
+let galleryItems: Array<{
+  id: string;
+  title: string;
+  author: string;
+  publisher?: string;
+  description: string;
+  imagePath: string;
+  tags: string[];
+}> = [];
+
+// 折り紙作品がある投稿のみを対象とする
+for (const post of allPosts) {
+  if (post.data.images?.origami && !post.data.title.includes('を折らない')) {
+    galleryItems.push({
+      id: post.data.id || post.slug,
+      title: post.data.title,
+      author: post.data.author,
+      publisher: post.data.publisher,
+      description: post.data.description,
+      imagePath: post.data.images.origami,
+      tags: post.data.tags || []
+    });
+  }
+}
+
+// ID順でソート（新しい順）
+galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
 ---
 
 <Layout title="Paper After Word" currentPage="top">
@@ -79,7 +108,21 @@ const posts = featuredPostIds.map(id =>
       
       <section id="gallery" class="section">
         <h2>Gallery</h2>
-        <p class="section-text">折り紙作品のギャラリーは準備中です。</p>
+        {galleryItems.length > 0 ? (
+          <div class="gallery-container">
+            <div class="gallery-grid">
+              {galleryItems.map((item) => (
+                <div class="gallery-item">
+                  <a href={`/blog/${item.id}`} class="gallery-link">
+                    <img src={item.imagePath} alt={`${item.title}の折り紙作品`} class="gallery-image" />
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p class="section-text">折り紙作品のギャラリーは準備中です。</p>
+        )}
       </section>
       
       <section id="shop" class="section">

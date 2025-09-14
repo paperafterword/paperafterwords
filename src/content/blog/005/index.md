@@ -7,7 +7,7 @@ category: "読書"
 tags: ["折り紙", "事典", "技術", "実用"]
 description: "折り紙の技術と歴史を網羅した事典。折り紙愛好家必携の一冊。"
 images:
-  bookCover:
+  bookCover: ""
   origami: "/images/005/Photo_25-09-13-13-06-24.157.jpg"
 ---
 
