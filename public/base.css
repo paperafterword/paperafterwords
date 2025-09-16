@@ -868,6 +868,19 @@ strong {
 	color: var(--text-secondary);
 }
 
+.shop-image {
+	margin-top: 40px;
+	text-align: center;
+}
+
+.shop-image img {
+	max-width: 300px;
+	width: 100%;
+	height: auto;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
 /* レスポンシブデザイン */
 @media screen and (max-width: 930px) {
 	body {
