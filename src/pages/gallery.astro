@@ -44,11 +44,17 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
 ---
 
 <Layout title="Gallery - Paper After Word" currentPage="gallery">
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <ol>
+      <li><a href="/">ホーム</a></li>
+      <li class="current">Gallery</li>
+    </ol>
+  </nav>
 
-    <div class="page-header">
-      <h1>Gallery</h1>
-      <p>本を読んで、読んだ本を折り紙にする。</p>
-    </div>
+  <div class="page-header">
+    <h1>Gallery</h1>
+    <p>本を読んで、読んだ本を折り紙にする。</p>
+  </div>
 
     <main class="content">
       {galleryItems.length > 0 ? (

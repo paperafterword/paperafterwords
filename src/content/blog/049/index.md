@@ -5,7 +5,8 @@ author: "柚木麻子"
 publisher: "新潮社"
 category: "読書"
 tags: ["小説", "現代文学", "家族", "料理", "人間関係"]
-description: "料理を通じて描かれる家族の絆と人間関係の複雑さ。柚木麻子の新作小説。"
+description: "その威力ある美。その味は大胆さをもっている。文句なく面白い。"
+references: "『Origami Odyssey』Peter Engel"
 images:
   bookCover: "/images/049/cover.jpg"
   origami:

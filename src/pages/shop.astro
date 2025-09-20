@@ -4,15 +4,17 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Shop - Paper After Word" currentPage="shop">
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <ol>
+      <li><a href="/">ホーム</a></li>
+      <li class="current">Shop</li>
+    </ol>
+  </nav>
 
-    <div class="back">
-      <a href="/">← トップに戻る</a>
-    </div>
-
-    <div class="page-header">
-      <h1>Shop</h1>
-      <p>折り紙作品のオンラインショップ</p>
-    </div>
+  <div class="page-header">
+    <h1>Shop</h1>
+    <p>折り紙作品のオンラインショップ</p>
+  </div>
 
     <main class="content">
       <div class="coming-soon">

@@ -23,9 +23,13 @@ const otherPosts = allPosts
 ---
 
 <Layout title={`${post.data.title} - Paper After Word`} currentPage="blog">
-  <div class="back">
-    <a href="/blog">← 一覧に戻る</a>
-  </div>
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <ol>
+      <li><a href="/">ホーム</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li class="current">{post.data.title}</li>
+    </ol>
+  </nav>
 
   <main class="content-page">
     <article class="content-text">
@@ -58,6 +62,11 @@ const otherPosts = allPosts
                   loading="lazy" 
                   decoding="async" 
                 />
+              </div>
+            )}
+            {post.data.references && (
+              <div class="references">
+                <p>{post.data.references}</p>
               </div>
             )}
           </div>

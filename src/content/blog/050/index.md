@@ -5,7 +5,7 @@ author: "多和田葉子"
 publisher: "新潮文庫"
 category: "読書"
 tags: ["小説", "現代文学", "言語", "アイデンティティ", "文庫"]
-description: "自伝を書いた「わたし」。サーカスの花形「トスカ」。動物園の人気者「クヌート」。奇想天外で美しい、ホッキョクグマ三代の物語。野間文芸賞受賞作。"
+description: "奇想天外で美しい、ホッキョクグマ三代の物語。野間文芸賞受賞作。"
 images:
   bookCover: "/images/050/cover.jpg"
   origami: []

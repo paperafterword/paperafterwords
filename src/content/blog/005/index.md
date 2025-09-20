@@ -12,6 +12,7 @@ images:
     - "/images/005/Photo_25-09-13-13-06-24.157.jpg"
     - "/images/005/Photo_25-09-13-13-06-24.283.jpg"
     - "/images/005/Photo_25-09-13-13-06-24.375.jpg"
+references: "『Origami Odyssey』Peter Engel"
 ---
 
 ## 本の感想

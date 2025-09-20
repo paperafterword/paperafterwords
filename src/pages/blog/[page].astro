@@ -51,6 +51,13 @@ const { posts, currentPage, totalPages, hasPrevPage, hasNextPage, prevPage, next
 ---
 
 <Layout title="Blog - Paper After Word" currentPage="blog">
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <ol>
+      <li><a href="/">ホーム</a></li>
+      <li class="current">Blog（{currentPage}ページ目）</li>
+    </ol>
+  </nav>
+
   <div class="page-header">
     <h1>Blog</h1>
     <p>本を読んで、読んだ本を折り紙にする。</p>

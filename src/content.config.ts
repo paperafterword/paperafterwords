@@ -11,6 +11,7 @@ const blog = defineCollection({
     category: z.string(),
     tags: z.array(z.string()),
     description: z.string(),
+    references: z.string().optional(),
     images: z.object({
       bookCover: z.string().optional(),
       origami: z.union([z.string(), z.array(z.string())]).optional(),
