@@ -758,7 +758,6 @@ strong {
 .post-images img {
 	width: 300px;
 	height: auto;
-	border: 1px solid #f0f0f0;
 }
 
 /* ブログ記事の画像レイアウト */
@@ -1107,6 +1106,7 @@ strong {
 	
 	.post-images img {
 		width: 100%;
+		padding: 0 20px;
 	}
 
 	.meta .book-info {
