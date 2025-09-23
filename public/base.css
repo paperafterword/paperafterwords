@@ -873,7 +873,6 @@ strong {
 	width: 100%;
 	height: 375px; /* 4:3比率の高さ */
 	display: block;
-	border: 1px solid #f0f0f0;
 	object-fit: cover;
 	object-position: center;
 }

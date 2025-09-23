@@ -57,7 +57,7 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
 
     <main class="content">
         <figure class="camera-photo-container">
-          <img src="/assets/zatto.png" alt="雑踏" class="camera-photo" />
+          <canvas id="origami-canvas" class="camera-photo"></canvas>
           <figcaption class="photo-caption">
             « Fais ce que voudras.» 汝の欲するところを為せ
             <span class="quote-author">— フランソワ・ラブレー</span>
@@ -153,3 +153,272 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
         </div>
       </section>
 </Layout>
+
+<script>
+  const img = new Image();
+  img.src = "/assets/zatto.png";
+  
+  const craneImg = new Image();
+  craneImg.src = "/assets/origami-crane.svg";
+  
+  img.onload = () => {
+    const origW = img.width;
+    const origH = img.height;
+
+    const canvas = document.getElementById("origami-canvas");
+    const ctx = canvas.getContext("2d");
+    
+    // 高品質な描画設定
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+    function setupAnimation(W, H) {
+      // === 横折り（第1段階） ===
+      function drawHorizontal1(progress) {
+        const t = ease(progress);
+        const angle = t * Math.PI;
+        const cos = Math.cos(angle);
+        const flapW = Math.abs(cos) * (W / 2);
+
+        ctx.clearRect(0, 0, W, H);
+
+        // 左半分（画像）
+        ctx.drawImage(img, 0, 0, origW / 2, origH, 0, 0, W / 2, H);
+
+        // 右半分（折れる）
+        if (cos >= 0) {
+          ctx.drawImage(img, origW / 2, 0, origW / 2, origH, W / 2, 0, flapW, H);
+        } else {
+          ctx.fillStyle = "#f5f5dc";
+          ctx.fillRect(W / 2 - flapW, 0, flapW, H);
+        }
+
+        // 折り目の線（1回目の横折り）
+        if (progress > 0.05 && progress < 0.95) {
+          ctx.strokeStyle = "#ccc";
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(W / 2, 0);
+          ctx.lineTo(W / 2, H);
+          ctx.stroke();
+        }
+
+        // 影
+        if (angle > Math.PI / 2 && angle < Math.PI) {
+          const edgeX = W / 2 - flapW;
+          const ratio = (angle - Math.PI / 2) / (Math.PI / 2);
+
+          // 濃さは後半で急に暗くなる
+          let alpha = 0.5 * Math.pow(ratio, 1.5);
+          if (angle >= Math.PI - 0.01) alpha = 0;
+
+          // 影の長さは最初は一気に伸び、後半は緩やか
+          const shadowLen = (W / 2) * Math.sin(ratio * Math.PI / 2);
+
+          const grad = ctx.createLinearGradient(edgeX, 0, edgeX - shadowLen, 0);
+          grad.addColorStop(0, `rgba(0,0,0,${alpha})`);
+          grad.addColorStop(0.3, `rgba(0,0,0,${alpha * 0.6})`);
+          grad.addColorStop(1, "rgba(0,0,0,0)");
+
+          ctx.fillStyle = grad;
+          ctx.fillRect(edgeX - shadowLen, 0, shadowLen, H);
+        }
+      }
+
+      // === 縦折り（第2段階：白紙） ===
+      function drawVertical(progress) {
+        const t = ease(progress);
+        const angle = t * Math.PI;
+        const cos = Math.cos(angle);
+        const flapH = Math.abs(cos) * (H / 2);
+
+        ctx.clearRect(0, 0, W / 2, H);
+
+        ctx.fillStyle = "#f5f5dc";
+        ctx.fillRect(0, 0, W / 2, H / 2);
+
+        ctx.fillStyle = "#f5f5dc";
+        if (cos >= 0) {
+          ctx.fillRect(0, H / 2, W / 2, flapH);
+        } else {
+          ctx.fillRect(0, H / 2 - flapH, W / 2, flapH);
+        }
+
+        // 折り目の線（2回目の縦折り）
+        if (progress > 0.05 && progress < 0.95) {
+          ctx.strokeStyle = "#ccc";
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(0, H / 2);
+          ctx.lineTo(W / 2, H / 2);
+          ctx.stroke();
+        }
+
+        if (angle > Math.PI / 2 && angle < Math.PI) {
+          const edgeY = H / 2 - flapH;
+          const ratio = (angle - Math.PI / 2) / (Math.PI / 2);
+          let alpha = 0.4 * ratio;
+          if (angle >= Math.PI - 0.01) alpha = 0;
+          const shadowLen = (H / 2) * ratio;
+
+          const grad = ctx.createLinearGradient(0, edgeY, 0, edgeY - shadowLen);
+          grad.addColorStop(0, `rgba(0,0,0,${alpha})`);
+          grad.addColorStop(1, "rgba(0,0,0,0)");
+
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, edgeY - shadowLen, W / 2, shadowLen);
+        }
+      }
+
+      // === 横折り（第3段階：白紙） ===
+      function drawHorizontal2(progress) {
+        const t = ease(progress);
+        const angle = t * Math.PI;
+        const cos = Math.cos(angle);
+        const flapW = Math.abs(cos) * (W / 4);
+
+        ctx.clearRect(0, 0, W / 2, H / 2);
+
+        ctx.fillStyle = "#f5f5dc";
+        ctx.fillRect(0, 0, W / 4, H / 2);
+
+        ctx.fillStyle = "#f5f5dc";
+        if (cos >= 0) {
+          ctx.fillRect(W / 4, 0, flapW, H / 2);
+        } else {
+          ctx.fillRect(W / 4 - flapW, 0, flapW, H / 2);
+        }
+
+        // 折り目の線（3回目の横折り）
+        if (progress > 0.05 && progress < 0.95) {
+          ctx.strokeStyle = "#ccc";
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(W / 4, 0);
+          ctx.lineTo(W / 4, H / 2);
+          ctx.stroke();
+        }
+
+        if (angle > Math.PI / 2 && angle < Math.PI) {
+          const edgeX = W / 4 - flapW;
+          const ratio = (angle - Math.PI / 2) / (Math.PI / 2);
+          let alpha = 0.4 * ratio;
+          if (angle >= Math.PI - 0.01) alpha = 0;
+          const shadowLen = (W / 4) * ratio;
+
+          const grad = ctx.createLinearGradient(edgeX, 0, edgeX - shadowLen, 0);
+          grad.addColorStop(0, `rgba(0,0,0,${alpha})`);
+          grad.addColorStop(1, "rgba(0,0,0,0)");
+
+          ctx.fillStyle = grad;
+          ctx.fillRect(edgeX - shadowLen, 0, shadowLen, H / 2);
+        }
+      }
+
+      // === クリック制御 ===
+      let isAnimating = false;
+      let currentStage = 0;
+      let animationProgress = 0;
+      let animationStartTime = 0;
+      const animationDuration = 500; // 0.5秒で完了
+
+      function animate() {
+        if (!isAnimating) return;
+
+        const currentTime = Date.now();
+        const elapsed = currentTime - animationStartTime;
+        const progress = Math.min(1, elapsed / animationDuration);
+
+        if (progress < 1) {
+          // アニメーション継続
+          if (currentStage === 0) {
+            drawHorizontal1(progress);
+          } else if (currentStage === 1) {
+            drawVertical(progress);
+          } else if (currentStage === 2) {
+            drawHorizontal2(progress);
+          }
+          requestAnimationFrame(animate);
+        } else {
+          // 現在のステージ完了
+          if (currentStage === 0) {
+            currentStage = 1;
+            animationStartTime = currentTime;
+            requestAnimationFrame(animate);
+          } else if (currentStage === 1) {
+            currentStage = 2;
+            animationStartTime = currentTime;
+            requestAnimationFrame(animate);
+            } else {
+              // 全アニメーション完了 - 鶴の画像を表示
+              isAnimating = false;
+              currentStage = 0;
+              showCraneImage();
+            }
+        }
+      }
+
+      function showCraneImage() {
+        // 鶴の画像を表示
+        ctx.clearRect(0, 0, W, H);
+        
+        // 鶴の画像を左上に配置
+        const craneSize = Math.min(W, H) * 0.6;
+        const x = W * 0.1;
+        const y = H * 0.1;
+        
+        ctx.drawImage(craneImg, x, y, craneSize, craneSize);
+      }
+
+      function startAnimation() {
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        currentStage = 0;
+        animationStartTime = Date.now();
+        animate();
+      }
+
+      // クリックイベントを追加
+      canvas.addEventListener("click", startAnimation);
+      
+      // 初回描画
+      drawHorizontal1(0);
+    }
+
+    function resize() {
+      // CSSの設定に合わせたサイズ計算
+      const maxWidth = Math.min(500, window.innerWidth * 0.9);
+      const targetHeight = window.innerWidth <= 768 ? 250 : 375;
+      
+      // アスペクト比を保持しながらサイズを計算
+      const aspectRatio = origW / origH;
+      let W, H;
+      
+      if (maxWidth / targetHeight > aspectRatio) {
+        // 高さ基準
+        H = targetHeight;
+        W = Math.round(H * aspectRatio);
+      } else {
+        // 幅基準
+        W = maxWidth;
+        H = Math.round(W / aspectRatio);
+      }
+      
+      // デバイスピクセル比を考慮して高解像度で描画（サイズは変更しない）
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      
+      // コンテキストをスケールして高解像度対応
+      ctx.scale(dpr, dpr);
+      
+      setupAnimation(W, H);
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+  };
+</script>
