@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 const allPosts = await getCollection('blog');
 
 // フィーチャード記事のIDを指定（順番通りに表示）
-const featuredPostIds = ['049', '050', '006','047', '048','007']; 
+const featuredPostIds = ['049', '050','047', '048','007']; 
 
 // フィーチャード記事を指定された順番で取得
 const posts = featuredPostIds.map(id => 
@@ -142,13 +142,13 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
       </section> -->
       
       <section id="sns" class="section">
-        <h2>SNS</h2>
+        <h2 class="section-title">SNS</h2>
         <div class="sns-links">
           <a href="https://twitter.com/paperafterword" target="_blank" rel="noopener noreferrer" class="sns-link">
-            <span class="sns-icon">𝕏</span>
+            <span>𝕏</span>
           </a>
           <a href="https://jp.pinterest.com/paperafterword/" target="_blank" rel="noopener noreferrer" class="sns-link">
-            <img src="/assets/pinterest.png" alt="Pinterest" class="sns-icon">
+            <img src="/assets/pinterest.png" alt="Pinterest">
           </a>
         </div>
       </section>
@@ -157,10 +157,6 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
 <script>
   const img = new Image();
   img.src = "/assets/zatto.png";
-  
-  const craneImg = new Image();
-  craneImg.src = "/assets/origami-crane.svg";
-  
   img.onload = () => {
     const origW = img.width;
     const origH = img.height;
@@ -272,57 +268,103 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
         }
       }
 
-      // === 横折り（第3段階：白紙） ===
-      function drawHorizontal2(progress) {
-        const t = ease(progress);
-        const angle = t * Math.PI;
-        const cos = Math.cos(angle);
-        const flapW = Math.abs(cos) * (W / 4);
+        // === 横折り（第3段階：白紙） ===
+        function drawHorizontal2(progress) {
+          const t = ease(progress);
+          const angle = t * Math.PI;
+          const cos = Math.cos(angle);
+          const flapW = Math.abs(cos) * (W / 4);
 
-        ctx.clearRect(0, 0, W / 2, H / 2);
+          ctx.clearRect(0, 0, W / 2, H / 2);
 
-        ctx.fillStyle = "#f5f5dc";
-        ctx.fillRect(0, 0, W / 4, H / 2);
+          ctx.fillStyle = "#f5f5dc";
+          ctx.fillRect(0, 0, W / 4, H / 2);
 
-        ctx.fillStyle = "#f5f5dc";
-        if (cos >= 0) {
-          ctx.fillRect(W / 4, 0, flapW, H / 2);
-        } else {
-          ctx.fillRect(W / 4 - flapW, 0, flapW, H / 2);
+          ctx.fillStyle = "#f5f5dc";
+          if (cos >= 0) {
+            ctx.fillRect(W / 4, 0, flapW, H / 2);
+          } else {
+            ctx.fillRect(W / 4 - flapW, 0, flapW, H / 2);
+          }
+
+          // 折り目の線（3回目の横折り）
+          if (progress > 0.05 && progress < 0.95) {
+            ctx.strokeStyle = "#ccc";
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(W / 4, 0);
+            ctx.lineTo(W / 4, H / 2);
+            ctx.stroke();
+          }
+
+          if (angle > Math.PI / 2 && angle < Math.PI) {
+            const edgeX = W / 4 - flapW;
+            const ratio = (angle - Math.PI / 2) / (Math.PI / 2);
+            let alpha = 0.4 * ratio;
+            if (angle >= Math.PI - 0.01) alpha = 0;
+            const shadowLen = (W / 4) * ratio;
+
+            const grad = ctx.createLinearGradient(edgeX, 0, edgeX - shadowLen, 0);
+            grad.addColorStop(0, `rgba(0,0,0,${alpha})`);
+            grad.addColorStop(1, "rgba(0,0,0,0)");
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(edgeX - shadowLen, 0, shadowLen, H / 2);
+          }
         }
 
-        // 折り目の線（3回目の横折り）
-        if (progress > 0.05 && progress < 0.95) {
-          ctx.strokeStyle = "#ccc";
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(W / 4, 0);
-          ctx.lineTo(W / 4, H / 2);
-          ctx.stroke();
+        // === 縦折り（第4段階：白紙） ===
+        function drawVertical2(progress) {
+          const t = ease(progress);
+          const angle = t * Math.PI;
+          const cos = Math.cos(angle);
+          const flapH = Math.abs(cos) * (H / 4);
+
+          ctx.clearRect(0, 0, W / 4, H / 2);
+
+          ctx.fillStyle = "#f5f5dc";
+          ctx.fillRect(0, 0, W / 4, H / 4);
+
+          ctx.fillStyle = "#f5f5dc";
+          if (cos >= 0) {
+            ctx.fillRect(0, H / 4, W / 4, flapH);
+          } else {
+            ctx.fillRect(0, H / 4 - flapH, W / 4, flapH);
+          }
+
+          // 折り目の線（4回目の縦折り）
+          if (progress > 0.05 && progress < 0.95) {
+            ctx.strokeStyle = "#ccc";
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(0, H / 4);
+            ctx.lineTo(W / 4, H / 4);
+            ctx.stroke();
+          }
+
+          if (angle > Math.PI / 2 && angle < Math.PI) {
+            const edgeY = H / 4 - flapH;
+            const ratio = (angle - Math.PI / 2) / (Math.PI / 2);
+            let alpha = 0.4 * ratio;
+            if (angle >= Math.PI - 0.01) alpha = 0;
+            const shadowLen = (H / 4) * ratio;
+
+            const grad = ctx.createLinearGradient(0, edgeY, 0, edgeY - shadowLen);
+            grad.addColorStop(0, `rgba(0,0,0,${alpha})`);
+            grad.addColorStop(1, "rgba(0,0,0,0)");
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, edgeY - shadowLen, W / 4, shadowLen);
+          }
         }
-
-        if (angle > Math.PI / 2 && angle < Math.PI) {
-          const edgeX = W / 4 - flapW;
-          const ratio = (angle - Math.PI / 2) / (Math.PI / 2);
-          let alpha = 0.4 * ratio;
-          if (angle >= Math.PI - 0.01) alpha = 0;
-          const shadowLen = (W / 4) * ratio;
-
-          const grad = ctx.createLinearGradient(edgeX, 0, edgeX - shadowLen, 0);
-          grad.addColorStop(0, `rgba(0,0,0,${alpha})`);
-          grad.addColorStop(1, "rgba(0,0,0,0)");
-
-          ctx.fillStyle = grad;
-          ctx.fillRect(edgeX - shadowLen, 0, shadowLen, H / 2);
-        }
-      }
 
       // === クリック制御 ===
       let isAnimating = false;
+      let isCompleted = false; // アニメーション完了フラグ
       let currentStage = 0;
       let animationProgress = 0;
       let animationStartTime = 0;
-      const animationDuration = 500; // 0.5秒で完了
+      const animationDuration = 1000; // 1秒で完了
 
       function animate() {
         if (!isAnimating) return;
@@ -339,6 +381,8 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
             drawVertical(progress);
           } else if (currentStage === 2) {
             drawHorizontal2(progress);
+          } else if (currentStage === 3) {
+            drawVertical2(progress);
           }
           requestAnimationFrame(animate);
         } else {
@@ -351,29 +395,21 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
             currentStage = 2;
             animationStartTime = currentTime;
             requestAnimationFrame(animate);
-            } else {
-              // 全アニメーション完了 - 鶴の画像を表示
-              isAnimating = false;
-              currentStage = 0;
-              showCraneImage();
-            }
+          } else if (currentStage === 2) {
+            currentStage = 3;
+            animationStartTime = currentTime;
+            requestAnimationFrame(animate);
+          } else {
+            // 全アニメーション完了
+            isAnimating = false;
+            isCompleted = true; // 完了フラグを立てる
+            currentStage = 0;
+          }
         }
       }
 
-      function showCraneImage() {
-        // 鶴の画像を表示
-        ctx.clearRect(0, 0, W, H);
-        
-        // 鶴の画像を左上に配置
-        const craneSize = Math.min(W, H) * 0.6;
-        const x = W * 0.1;
-        const y = H * 0.1;
-        
-        ctx.drawImage(craneImg, x, y, craneSize, craneSize);
-      }
-
       function startAnimation() {
-        if (isAnimating) return;
+        if (isAnimating || isCompleted) return; // 完了済みの場合は実行しない
         
         isAnimating = true;
         currentStage = 0;
@@ -390,8 +426,9 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
 
     function resize() {
       // CSSの設定に合わせたサイズ計算
-      const maxWidth = Math.min(500, window.innerWidth * 0.9);
-      const targetHeight = window.innerWidth <= 768 ? 250 : 375;
+      const isMobile = window.innerWidth <= 768;
+      const maxWidth = isMobile ? window.innerWidth : Math.min(500, window.innerWidth * 0.9);
+      const targetHeight = isMobile ? 250 : 375;
       
       // アスペクト比を保持しながらサイズを計算
       const aspectRatio = origW / origH;

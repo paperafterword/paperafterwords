@@ -1054,10 +1054,12 @@ strong {
 
 	.camera-photo-container {
 		max-width: 100%;
+		margin: 0 -15px; /* 左右の余白を削除 */
 	}
 
 	.camera-photo {
-		max-width: 100%;
+		width: 100vw; /* ビューポート幅いっぱい */
+		max-width: none;
 		height: 250px; /* モバイル用の高さ */
 	}
 
