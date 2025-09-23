@@ -318,18 +318,18 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
           const t = ease(progress);
           const angle = t * Math.PI;
           const cos = Math.cos(angle);
-          const flapH = Math.abs(cos) * (H / 4);
+          const flapH = Math.abs(cos) * (H / 8);
 
-          ctx.clearRect(0, 0, W / 4, H / 2);
+          ctx.clearRect(0, 0, W / 4, H / 4);
 
           ctx.fillStyle = "#f5f5dc";
-          ctx.fillRect(0, 0, W / 4, H / 4);
+          ctx.fillRect(0, 0, W / 4, H / 8);
 
           ctx.fillStyle = "#f5f5dc";
           if (cos >= 0) {
-            ctx.fillRect(0, H / 4, W / 4, flapH);
+            ctx.fillRect(0, H / 8, W / 4, flapH);
           } else {
-            ctx.fillRect(0, H / 4 - flapH, W / 4, flapH);
+            ctx.fillRect(0, H / 8 - flapH, W / 4, flapH);
           }
 
           // 折り目の線（4回目の縦折り）
@@ -337,17 +337,17 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
             ctx.strokeStyle = "#ccc";
             ctx.lineWidth = 0.5;
             ctx.beginPath();
-            ctx.moveTo(0, H / 4);
-            ctx.lineTo(W / 4, H / 4);
+            ctx.moveTo(0, H / 8);
+            ctx.lineTo(W / 4, H / 8);
             ctx.stroke();
           }
 
           if (angle > Math.PI / 2 && angle < Math.PI) {
-            const edgeY = H / 4 - flapH;
+            const edgeY = H / 8 - flapH;
             const ratio = (angle - Math.PI / 2) / (Math.PI / 2);
             let alpha = 0.4 * ratio;
             if (angle >= Math.PI - 0.01) alpha = 0;
-            const shadowLen = (H / 4) * ratio;
+            const shadowLen = (H / 8) * ratio;
 
             const grad = ctx.createLinearGradient(0, edgeY, 0, edgeY - shadowLen);
             grad.addColorStop(0, `rgba(0,0,0,${alpha})`);
