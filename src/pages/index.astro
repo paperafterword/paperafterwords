@@ -313,50 +313,6 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
           }
         }
 
-        // === 縦折り（第4段階：白紙） ===
-        function drawVertical2(progress) {
-          const t = ease(progress);
-          const angle = t * Math.PI;
-          const cos = Math.cos(angle);
-          const flapH = Math.abs(cos) * (H / 8);
-
-          ctx.clearRect(0, 0, W / 4, H / 4);
-
-          ctx.fillStyle = "#f5f5dc";
-          ctx.fillRect(0, 0, W / 4, H / 8);
-
-          ctx.fillStyle = "#f5f5dc";
-          if (cos >= 0) {
-            ctx.fillRect(0, H / 8, W / 4, flapH);
-          } else {
-            ctx.fillRect(0, H / 8 - flapH, W / 4, flapH);
-          }
-
-          // 折り目の線（4回目の縦折り）
-          if (progress > 0.05 && progress < 0.95) {
-            ctx.strokeStyle = "#ccc";
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(0, H / 8);
-            ctx.lineTo(W / 4, H / 8);
-            ctx.stroke();
-          }
-
-          if (angle > Math.PI / 2 && angle < Math.PI) {
-            const edgeY = H / 8 - flapH;
-            const ratio = (angle - Math.PI / 2) / (Math.PI / 2);
-            let alpha = 0.4 * ratio;
-            if (angle >= Math.PI - 0.01) alpha = 0;
-            const shadowLen = (H / 8) * ratio;
-
-            const grad = ctx.createLinearGradient(0, edgeY, 0, edgeY - shadowLen);
-            grad.addColorStop(0, `rgba(0,0,0,${alpha})`);
-            grad.addColorStop(1, "rgba(0,0,0,0)");
-
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, edgeY - shadowLen, W / 4, shadowLen);
-          }
-        }
 
       // === クリック制御 ===
       let isAnimating = false;
@@ -381,8 +337,6 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
             drawVertical(progress);
           } else if (currentStage === 2) {
             drawHorizontal2(progress);
-          } else if (currentStage === 3) {
-            drawVertical2(progress);
           }
           requestAnimationFrame(animate);
         } else {
@@ -393,10 +347,6 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
             requestAnimationFrame(animate);
           } else if (currentStage === 1) {
             currentStage = 2;
-            animationStartTime = currentTime;
-            requestAnimationFrame(animate);
-          } else if (currentStage === 2) {
-            currentStage = 3;
             animationStartTime = currentTime;
             requestAnimationFrame(animate);
           } else {
@@ -450,7 +400,7 @@ galleryItems.sort((a, b) => parseInt(b.id) - parseInt(a.id));
       canvas.height = H * dpr;
       
       // コンテキストをスケールして高解像度対応
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       
       setupAnimation(W, H);
     }
